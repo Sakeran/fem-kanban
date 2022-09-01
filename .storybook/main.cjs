@@ -16,6 +16,6 @@ module.exports = {
     preprocess: require("svelte-preprocess")({}),
   },
   features: {
-    storyStoreV7: true,
+    storyStoreV7: false,
   },
 };
