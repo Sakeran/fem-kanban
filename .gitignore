@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# Cypress videos
+cypress/videos
+
 # Ignore default Storybook examples
 src/stories

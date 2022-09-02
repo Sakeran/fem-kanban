@@ -10,7 +10,10 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "cypress:ff": "cypress run -b firefox",
+    "cypress:chrome": "cypress run -b chrome",
+    "cypress:edge": "cypress run -b edge"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
