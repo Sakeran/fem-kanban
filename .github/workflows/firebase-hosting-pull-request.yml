@@ -15,3 +15,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FEM_KANBAN_ARM }}'
           projectId: fem-kanban-arm
+    env:
+      CYPRESS_INSTALL_BINARY_: 0
