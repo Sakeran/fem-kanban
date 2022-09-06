@@ -2,5 +2,5 @@
 </script>
 
 <main>
-    <h1>Kanban App</h1>
+    <h1>Kanban App (With Firebase Hosting)</h1>
 </main>
