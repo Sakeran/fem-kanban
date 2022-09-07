@@ -17,6 +17,3 @@
 </script>
 
 <svelte:element this={element} class={classList}><slot /></svelte:element>
-
-<style lang="postcss">
-</style>
