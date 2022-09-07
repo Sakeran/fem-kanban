@@ -42,7 +42,7 @@ module.exports = {
       "23/13": "1.769", // BodyL
     },
 
-    tracking: {
+    letterSpacing: {
       "24p": "0.15rem",
     },
 
