@@ -47,7 +47,19 @@ module.exports = {
     },
 
     extend: {
-      spacing: {},
+      spacing: {
+        2.25: "0.5625rem", // 9px
+        3: "0.75rem", // 12px
+        3.25: "0.8125rem", // 13px
+        3.5: "0.875rem", // 14px
+        3.75: "0.9375rem", // 15px
+        4.5: "1.125rem", // 18px
+        4.75: "1.1875rem", // 19px
+        5.5: "1.375rem", // 22px
+        5.75: "1.4375rem", // 23px
+        7: "1.75rem", // 28px
+        8.5: "2.125rem", // 34px
+      },
       maxWidth: {},
       maxHeight: {},
     },
