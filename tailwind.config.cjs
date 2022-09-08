@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["index.html", "src/**/*.{svelte,ts,js}"],
@@ -67,10 +69,18 @@ module.exports = {
         5.75: "1.4375rem", // 23px
         7: "1.75rem", // 28px
         8.5: "2.125rem", // 34px
+        15.5: "3.875rem", // 62px
       },
       maxWidth: {},
-      maxHeight: {},
+      minHeight: {
+        "button-l": "3rem",
+        "button-s": "2.5rem",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("hocus", ["&:hover", "&:focus-visible"]);
+    }),
+  ],
 };
