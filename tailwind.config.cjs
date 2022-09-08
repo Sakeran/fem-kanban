@@ -47,6 +47,13 @@ module.exports = {
       "24p": "0.15rem",
     },
 
+    borderRadius: {
+      full: "100vh",
+      round: "50%",
+      sm: "0.375rem",
+      lg: "0.5rem",
+    },
+
     extend: {
       spacing: {
         2.25: "0.5625rem", // 9px
