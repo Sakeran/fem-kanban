@@ -6,6 +6,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     colors: {
+      transparent: "transparent",
       black: "hsl(237 100% 4%)",
       white: "hsl(0 0% 100%)",
       "main-purple": {
@@ -52,6 +53,8 @@ module.exports = {
     borderRadius: {
       full: "100vh",
       round: "50%",
+      xxs: "0.125rem",
+      xs: "0.25rem",
       sm: "0.375rem",
       lg: "0.5rem",
     },
