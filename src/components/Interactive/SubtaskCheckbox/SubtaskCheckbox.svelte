@@ -13,7 +13,7 @@
 </script>
 
 <label
-  class="p-3 rounded-xs bg-gray-light hocus:bg-main-purple-normal/25 focus-within:bg-main-purple-normal/25 grid gap-4 cursor-pointer motion-safe:transition-colors motion-safe:ease-in-out"
+  class="p-3 rounded-xs bg-gray-light dark:bg-gray-very-dark hocus:bg-main-purple-normal/25 focus-within:bg-main-purple-normal/25 grid gap-4 cursor-pointer motion-safe:transition-colors motion-safe:ease-in-out"
 >
   <input
     on:change={toggle}
@@ -43,7 +43,7 @@
     </svg>
   </div>
   <span
-    class="row-span-1 row-start-1 font-bold text-black text-12p peer-checked:text-black/50 peer-checked:line-through peer-checked:decoration-black/50 select-none"
+    class="row-span-1 row-start-1 font-bold text-black dark:text-white text-12p peer-checked:text-black/50 dark:peer-checked:text-white/50 peer-checked:line-through peer-checked:decoration-black/50 dark:peer-checked:decoration-white/50  select-none"
     >{content}</span
   >
 </label>
@@ -62,7 +62,12 @@
     border: 1px solid theme("colors.gray.medium" / 25%);
   }
 
+  :global(.dark) input[type="checkbox"] {
+    background-color: theme("colors.gray.dark");
+  }
+
   input[type="checkbox"]:checked {
     background-color: theme("colors.main-purple.normal");
+    border-color: transparent;
   }
 </style>
