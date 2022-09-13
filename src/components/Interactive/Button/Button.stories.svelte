@@ -50,6 +50,11 @@
 />
 
 <Story
+  name="PrimaryNarrow"
+  args={{ content: "+ Add New Task", style: "PrimaryNarrow" }}
+/>
+
+<Story
   name="Primary L (Extra Classes)"
   args={{
     content: "Button Primary Block",
