@@ -13,7 +13,7 @@
   >
 
   <div
-    class="py-2 px-4 rounded-xs bg-white dark:bg-gray-dark border border-gray-medium/25 focus-within:border-gray-medium/100"
+    class="py-2 px-4 rounded-xs bg-white dark:bg-gray-dark border border-gray-medium/25 hover:border-gray-medium/100 focus-within:border-gray-medium/100 motion-safe:transition-colors motion-safe:ease-in-out"
   >
     <textarea
       type="text"

@@ -21,7 +21,7 @@
   >
 
   <div
-    class="py-2 px-4 rounded-xs bg-white dark:bg-gray-dark border border-gray-medium/25 flex gap-2 focus-within:border-gray-medium/100 [&[data-errors]]:border-red-normal"
+    class="py-2 px-4 rounded-xs bg-white dark:bg-gray-dark border border-gray-medium/25 flex gap-2 hover:border-gray-medium/100 focus-within:border-gray-medium/100 [&[data-errors]]:border-red-normal motion-safe:transition-colors motion-safe:ease-in-out"
     data-errors={hasErrors || null}
   >
     <input
