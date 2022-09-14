@@ -13,6 +13,7 @@
     label: { control: "text" },
     value: { control: "text" },
     required: { control: "boolean" },
+    visuallyHideLabel: { control: "boolean" },
   }}
   parameters={{ actions: { handles: ["input", "change", "blur"] } }}
 />
@@ -36,6 +37,20 @@
 />
 
 <Story
+  name="Visually Hidden Label"
+  args={{
+    label: "Text Field",
+    placeholder: "Enter task name",
+    visuallyHideLabel: true,
+  }}
+  play={async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const label = canvas.getByText("Text Field");
+    expect(label).toHaveClass("sr-only");
+  }}
+/>
+
+<Story
   name="Enter Text"
   args={{ label: "Text Field", placeholder: "Enter task name", required: true }}
   play={async ({ canvasElement }) => {
@@ -43,7 +58,7 @@
     const input = canvas.getByLabelText("Text Field");
 
     await userEvent.type(input, "Building a slideshow");
-    expect(input).toHaveValue( "Building a slideshow")
+    expect(input).toHaveValue("Building a slideshow");
 
     const errors = canvas.getByTestId("ti-error");
     await waitFor(() => {

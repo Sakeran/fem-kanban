@@ -3,6 +3,7 @@
   export let placeholder: string = "";
   export let value: string = "";
   export let required: boolean = false;
+  export let visuallyHideLabel: boolean = false;
 
   const inputId = `ti-input-${Math.random().toString().slice(3, 13)}`;
   const inputIdErrors = inputId + "-errors";
@@ -17,6 +18,7 @@
 <div class="flex flex-col gap-2">
   <label
     for={inputId}
+    class:sr-only={visuallyHideLabel}
     class="font-bold text-12p text-gray-medium dark:text-white">{label}</label
   >
 
