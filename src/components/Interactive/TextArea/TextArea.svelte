@@ -23,7 +23,7 @@
       on:change
       rows="4"
       class="min-h-[6rem] w-full resize-none text-13p font-medium leading-23/13 text-black placeholder:text-black/25 dark:text-white dark:placeholder:text-white/25 basis-full outline-none bg-transparent"
-      {value}
+      bind:value
       {placeholder}
     />
     
