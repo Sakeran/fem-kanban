@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     colors: {
       transparent: "transparent",
+      current: "currentcolor",
       black: "hsl(237 100% 4%)",
       white: "hsl(0 0% 100%)",
       "main-purple": {
