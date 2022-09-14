@@ -4,6 +4,7 @@
   export let value: string = "";
   export let required: boolean = false;
   export let visuallyHideLabel: boolean = false;
+  export let classes: string = "";
 
   const inputId = `ti-input-${Math.random().toString().slice(3, 13)}`;
   const inputIdErrors = inputId + "-errors";
@@ -15,7 +16,7 @@
   }
 </script>
 
-<div class="flex flex-col gap-2">
+<div class={"flex flex-col gap-2 " + classes || ""}>
   <label
     for={inputId}
     class:sr-only={visuallyHideLabel}

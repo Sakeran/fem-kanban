@@ -14,6 +14,7 @@
     value: { control: "text" },
     required: { control: "boolean" },
     visuallyHideLabel: { control: "boolean" },
+    classes: { control: "text" },
   }}
   parameters={{ actions: { handles: ["input", "change", "blur"] } }}
 />
@@ -47,6 +48,15 @@
     const canvas = within(canvasElement);
     const label = canvas.getByText("Text Field");
     expect(label).toHaveClass("sr-only");
+  }}
+/>
+
+<Story
+  name="Extra Wrapper Classes"
+  args={{
+    label: "Text Field",
+    placeholder: "Enter task name",
+    classes: "border-2 p-2 border-main-purple-normal rounded-sm ",
   }}
 />
 
