@@ -29,5 +29,8 @@ cypress/videos
 # Ignore default Storybook examples
 src/stories
 
+# Storybook Static
+storybook-static/
+
 # Firebase
 .firebase/*.cache
