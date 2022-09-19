@@ -17,6 +17,7 @@
 >
   <input
     on:change={toggle}
+    data-testid="subtask-cb"
     type="checkbox"
     checked={completed}
     class:peer={true}
