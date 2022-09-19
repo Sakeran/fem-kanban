@@ -5,41 +5,34 @@
   // Allowable border radii (in pixels)
   type CardBorderRadius = 6 | 8;
 
-  // Allowable card paddings (in pixels)
-  type CardPadding = 16 | 23 | 32 | 40;
-
-  // Allowable padding configurations (follows standard CSS padding syntax)
-  type CardPaddingDef =
-    | CardPadding
-    | [CardPadding]
-    | [CardPadding, CardPadding]
-    | [CardPadding, CardPadding, CardPadding]
-    | [CardPadding, CardPadding, CardPadding, CardPadding];
-
   // Optional min-height of card (no given units)
   type CardMinHeight = "auto" | number;
+
+  // Allowable padding styles
+  type CardPaddingStyle = keyof(typeof cardPaddingStyles);
+
+  // Padding Styles
+  export const cardPaddingStyles = {
+    TodoCard: "py-5.75 px-4",
+    Modal: "p-6 md:p-8"
+  }
 </script>
 
 <script lang="ts">
   export let element: CardElement = "div";
   export let borderRadius: CardBorderRadius = 6;
+  export let paddingStyle: CardPaddingStyle = "TodoCard";
   export let minHeight: CardMinHeight = "auto";
-  export let padding: CardPaddingDef = 16;
   export let shadow: boolean = false;
   export let classes: string = "";
 
-  let paddingVar = [padding]
-    .flat()
-    .map((el) => el / 16)
-    .reduce((acc, el) => acc + " " + el + "rem", "");
-
   let classList = "bg-white dark:bg-gray-dark";
+  if (paddingStyle) classList += " " + cardPaddingStyles[paddingStyle];
   if (classes) classList += " " + classes;
 </script>
 
 <svelte:element
   this={element}
-  style:--card-padding={paddingVar}
   style:--card-min-height={minHeight}
   class:card={true}
   class:card-shadow={shadow}
@@ -52,7 +45,6 @@
 
 <style lang="postcss">
   .card {
-    padding: var(--card-padding, 1rem);
     min-height: var(--card-min-height, "auto");
   }
 

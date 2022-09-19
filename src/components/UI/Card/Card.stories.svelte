@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Meta, Story, Template } from "@storybook/addon-svelte-csf";
 
-  import Card from "./Card.svelte";
+  import Card, { cardPaddingStyles } from "./Card.svelte";
   import Heading from "../../Typography/Heading/Heading.svelte";
   import Text from "../../Typography/Text/Text.svelte";
 </script>
@@ -12,8 +12,8 @@
   argTypes={{
     element: { control: "radio", options: ["div", "section"] },
     borderRadius: { control: "radio", options: [6, 8] },
+    paddingStyle: { control: "radio", options: Object.keys(cardPaddingStyles) },
     minHeight: { control: "text" },
-    padding: { control: "array" },
     shadow: { control: "boolean" },
 
     containerWidthPx: { control: "number", defaultValue: 320 },
@@ -42,7 +42,6 @@
   args={{
     element: "div",
     borderRadius: 6,
-    padding: [23, 16],
     shadow: true,
     minHeight: "auto",
   }}
