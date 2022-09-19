@@ -37,7 +37,7 @@
 
 <Card borderRadius={6} paddingStyle="Modal">
   <div class="flex items-center">
-    <Heading style="L" classes="text-black dark:text-white grow"
+    <Heading element="h2" style="L" classes="text-black dark:text-white grow"
       >{title}</Heading
     >
     <div class="relative left-1">

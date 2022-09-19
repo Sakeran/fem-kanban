@@ -52,7 +52,9 @@
 </script>
 
 <Card borderRadius={6} paddingStyle="Modal">
-  <Heading classes="text-black dark:text-white">{cardTitle}</Heading>
+  <Heading element="h2" classes="text-black dark:text-white"
+    >{cardTitle}</Heading
+  >
   <TextInput bind:value={title} label="Title" required={true} classes="mt-6" />
   <TextArea label="Description" bind:value={description} classes="mt-6" />
   <InputList
@@ -62,7 +64,12 @@
     bind:items={subtasks}
     classes="mt-6"
   />
-  <Select options={boardColumns} label="Status" bind:value={status} classes="mt-6" />
+  <Select
+    options={boardColumns}
+    label="Status"
+    bind:value={status}
+    classes="mt-6"
+  />
   <Button style="PrimaryS" classes="w-full mt-6" on:click={handleSubmitTask}
     >{submitButtonText}</Button
   >

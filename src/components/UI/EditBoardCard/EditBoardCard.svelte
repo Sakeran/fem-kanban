@@ -41,7 +41,7 @@
 </script>
 
 <Card borderRadius={6} paddingStyle="Modal">
-  <Heading classes="text-black dark:text-white">{title}</Heading>
+  <Heading element="h2" classes="text-black dark:text-white">{title}</Heading>
   <TextInput
     bind:value={name}
     label="Board Name"
