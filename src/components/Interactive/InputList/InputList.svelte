@@ -5,6 +5,7 @@
 
   export let label: string;
   export let buttonText: string = "Add New Subtask";
+  export let itemName: string = "subtask";
   export let items: string[] = [];
 
   if (items.length === 0) items.push("");
@@ -23,7 +24,7 @@
   function handleDeletion(itemIdx: number) {
     // Don't delete non-existent entries
     if (itemIdx >= items.length) return;
-    // Always show at least one subtask box
+    // Always show at least one item box
     if (items.length === 1) return;
 
     items.splice(itemIdx, 1);
@@ -37,7 +38,7 @@
     {#each items as item, idx}
       <div class="flex gap-1" bind:this={inputContainer}>
         <TextInput
-          label={item || "blank subtask"}
+          label={item || "blank " + itemName}
           placeholder="e.g. Make coffee"
           classes="basis-full"
           required
@@ -73,7 +74,9 @@
           </svg>
 
           <span class="sr-only"
-            >Delete {item ? "subtask " + item : "blank subtask"}</span
+            >Delete {item
+              ? itemName + " " + item
+              : "blank " + itemName}</span
           >
         </button>
       </div>
