@@ -14,7 +14,7 @@
     for={selectId}>{label}</label
   >
   <div
-    class="relative rounded-xs bg-white dark:bg-gray-dark border border-gray-medium/25 hover:border-main-purple-normal focus-within:border-main-purple-normal motion-safe:transition-colors motion-safe:ease-in-out"
+    class="mt-2 relative rounded-xs bg-white dark:bg-gray-dark border border-gray-medium/25 hover:border-main-purple-normal focus-within:border-main-purple-normal motion-safe:transition-colors motion-safe:ease-in-out"
   >
     <select
       class="py-2 px-4 rounded-xxs appearance-none bg-transparent w-full cursor-pointer font-medium text-13p leading-23/13 text-black dark:text-white focus-visible:outline outline-1 focus-visible:outline-main-purple-normal focus-visible:outline-offset-4 "
