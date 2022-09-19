@@ -50,6 +50,10 @@
 </label>
 
 <style lang="postcss">
+  label {
+    grid-template-columns: max-content 1fr;
+  }
+
   input[type="checkbox"] {
     appearance: none;
     box-sizing: content-box;
