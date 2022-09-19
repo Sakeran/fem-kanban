@@ -2,12 +2,13 @@
   export let label: string;
   export let options: string[];
   export let value: string = "";
+  export let classes: string = "";
 
   const selectId = `select-id-${Math.random().toString().slice(3, 13)}`;
   if (!value) value = options[0];
 </script>
 
-<div class="flex flex-col gap-2">
+<div class={"flex flex-col gap-2" + classes ? " " + classes : ""}>
   <label
     class="font-bold text-12p text-gray-medium dark:text-white"
     for={selectId}>{label}</label

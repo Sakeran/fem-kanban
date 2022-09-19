@@ -2,11 +2,12 @@
   export let label: string;
   export let placeholder: string = "";
   export let value: string = "";
+  export let classes = "";
 
   const textAreaId = `ti-input-${Math.random().toString().slice(3, 13)}`;
 </script>
 
-<div class="flex flex-col gap-2">
+<div class={"flex flex-col gap-2" + classes ? " " + classes : ""}>
   <label
     for={textAreaId}
     class="font-bold text-12p text-gray-medium dark:text-white">{label}</label
@@ -26,6 +27,5 @@
       bind:value
       {placeholder}
     />
-    
   </div>
 </div>

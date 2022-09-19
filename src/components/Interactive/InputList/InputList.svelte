@@ -3,6 +3,8 @@
   import Button from "../Button/Button.svelte";
   import TextInput from "../TextInput/TextInput.svelte";
 
+  export let classes = "";
+
   export let label: string;
   export let buttonText: string = "Add New Subtask";
   export let itemName: string = "subtask";
@@ -32,7 +34,7 @@
   }
 </script>
 
-<div>
+<div class={classes || null}>
   <h3 class="text-12p font-bold text-gray-medium dark:text-white">{label}</h3>
   <div class="mt-2 flex flex-col gap-3">
     {#each items as item, idx}
@@ -74,9 +76,7 @@
           </svg>
 
           <span class="sr-only"
-            >Delete {item
-              ? itemName + " " + item
-              : "blank " + itemName}</span
+            >Delete {item ? itemName + " " + item : "blank " + itemName}</span
           >
         </button>
       </div>
