@@ -7,19 +7,21 @@
   import TextInput from "../../Interactive/TextInput/TextInput.svelte";
   import Heading from "../../Typography/Heading/Heading.svelte";
 
-  let boardName = "";
-  let columns: string[] = [];
+  export let title: string = "Add New Board";
+  export let submitButtonText: string = "Create New Board";
+  export let name = "";
+  export let columns: string[] = [];
 
   const dispatch = createEventDispatcher();
 
   function handleCreateBoard() {
     if (!formIsValid()) return;
-    dispatch("createBoard", { name: boardName, columns });
+    dispatch("submitBoard", { name, columns });
   }
 
   function formIsValid() {
     // Board name must exist
-    if (boardName.length === 0) return false;
+    if (name.length === 0) return false;
 
     // Require at least one column
     if (columns.length < 1) return false;
@@ -39,9 +41,9 @@
 </script>
 
 <Card borderRadius={6} paddingStyle="Modal">
-  <Heading classes="text-black dark:text-white">Add New Board</Heading>
+  <Heading classes="text-black dark:text-white">{title}</Heading>
   <TextInput
-    bind:value={boardName}
+    bind:value={name}
     label="Board Name"
     required={true}
     classes="my-6"
@@ -53,6 +55,6 @@
     bind:items={columns}
   />
   <Button style="PrimaryS" classes="w-full mt-6" on:click={handleCreateBoard}
-    >Create New Board</Button
+    >{submitButtonText}</Button
   >
 </Card>

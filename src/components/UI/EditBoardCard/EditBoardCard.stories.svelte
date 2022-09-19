@@ -2,14 +2,14 @@
   import { Meta, Story, Template } from "@storybook/addon-svelte-csf";
   import { userEvent, within } from "@storybook/testing-library";
   import { expect } from "@storybook/jest";
-  import NewBoardCard from "./NewBoardCard.svelte";
+  import EditBoardCard from "./EditBoardCard.svelte";
 </script>
 
 <Meta
-  title="UI/NewBoardCard"
-  component={NewBoardCard}
+  title="UI/EditBoardCard"
+  component={EditBoardCard}
   argTypes={{
-    createBoard: { action: "createBoard" },
+    submitBoard: { action: "submitBoard" },
   }}
 />
 
@@ -17,11 +17,24 @@
   <div
     style="max-width: 30rem; padding: 1rem; background-color: hsl(0 0% 0% / .4);"
   >
-    <NewBoardCard on:createBoard={args.createBoard} />
+    <EditBoardCard {...args} on:submitBoard={args.submitBoard} />
   </div>
 </Template>
 
-<Story name="Default" args={{}} />
+<Story
+  name="Default"
+  args={{ title: "Add New Board", submitButtonText: "Create New Board" }}
+/>
+
+<Story
+  name="Edit Existing Card"
+  args={{
+    name: "Existing Board",
+    columns: ["Column 1", "Column 2", "Column 3"],
+    title: "Edit Board",
+    submitButtonText: "Save Changes",
+  }}
+/>
 
 <Story
   name="Create Board"
@@ -29,7 +42,7 @@
   play={async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const createBoardFn = args.createBoard;
+    const createBoardFn = args.submitBoard;
 
     // Get Inputs
     const nameInput = canvas.getByLabelText("Board Name");
