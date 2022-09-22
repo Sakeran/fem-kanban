@@ -16,7 +16,7 @@
   }
 </script>
 
-<div class={"flex flex-col gap-2 " + classes || ""}>
+<div class={"flex flex-col gap-2 " + (classes || "")}>
   <label
     for={inputId}
     class:sr-only={visuallyHideLabel}
