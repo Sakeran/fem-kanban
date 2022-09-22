@@ -10,7 +10,8 @@
   component={ViewTaskCard}
   argTypes={{
     updateTask: { action: "updateTask" },
-    toggleTaskMenu: { action: "toggleTaskMenu" },
+    editTask: { action: "editTask" },
+    deleteTask: { action: "deleteTask" },
   }}
 />
 
@@ -21,7 +22,8 @@
     <ViewTaskCard
       {...args}
       on:updateTask={args.updateTask}
-      on:toggleTaskMenu={args.toggleTaskMenu}
+      on:editTask={args.editTask}
+      on:deleteTask={args.deleteTask}
     />
   </div>
 </Template>
@@ -108,6 +110,9 @@
 
     // Toggle Menu
     await userEvent.click(toggleButton);
-    expect(toggleTaskFn).toBeCalledTimes(1);
+
+    // Confirm that menu exists
+    canvas.getByRole("menu");
+    
   }}
 />

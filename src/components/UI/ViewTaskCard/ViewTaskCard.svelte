@@ -4,7 +4,7 @@
   import Card from "../Card/Card.svelte";
   import Heading from "../../Typography/Heading/Heading.svelte";
   import Select from "../../Interactive/Select/Select.svelte";
-  import MenuToggle from "../../Interactive/MenuToggle/MenuToggle.svelte";
+  import Menu from "../../Interactive/Menu/Menu.svelte";
   import Text from "../../Typography/Text/Text.svelte";
   import SubtaskCheckbox from "../../Interactive/SubtaskCheckbox/SubtaskCheckbox.svelte";
 
@@ -30,8 +30,16 @@
     dispatch("updateTask", { subtasks, status });
   }
 
-  function handleMenuToggle() {
-    dispatch("toggleTaskMenu");
+  function handleMenuAction(e) {
+    const actionId = e.detail;
+
+    if (actionId === "edit") {
+      return dispatch("editTask");
+    }
+
+    if (actionId === "delete") {
+      return dispatch("deleteTask");
+    }
   }
 </script>
 
@@ -41,7 +49,15 @@
       >{title}</Heading
     >
     <div class="relative left-1">
-      <MenuToggle textAlternative="Options Menu" on:click={handleMenuToggle} />
+      <!-- <MenuToggle textAlternative="Options Menu" on:click={handleMenuToggle} /> -->
+      <Menu
+        on:actionClicked={handleMenuAction}
+        openButtonText="Options Menu"
+        actions={[
+          { id: "edit", label: "Edit Task" },
+          { id: "delete", label: "Delete Task", style: "destructive" },
+        ]}
+      />
     </div>
   </div>
   <Text style="L" classes="mt-6 text-gray-medium">{description}</Text>
@@ -49,7 +65,10 @@
     <legend class="sr-only"
       >Subtasks ({subtasksFinished} of {subtasksTotal})</legend
     >
-    <div class="font-bold text-12p text-gray-medium dark:text-white" aria-hidden="true">
+    <div
+      class="font-bold text-12p text-gray-medium dark:text-white"
+      aria-hidden="true"
+    >
       Subtasks ({subtasksFinished} of {subtasksTotal})
     </div>
 
