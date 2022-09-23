@@ -10,11 +10,10 @@
 
 <Card
   borderRadius={8}
-  padding={[23, 16]}
   shadow={true}
   classes="relative text-black dark:text-white hover:text-main-purple-normal focus-within:text-main-purple-normal dark:hover:text-main-purple-normal dark:focus-within:text-main-purple-normal"
 >
-  <Heading element={"h3"} style="M">{title}</Heading>
+  <Heading element={"h4"} style="M">{title}</Heading>
   <Text style="M" classes="mt-2 text-gray-medium"
     >{subtasksCompleted} of {subtaskTotal} complete</Text
   >
