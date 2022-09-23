@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-  export let element: "h1" | "h2" | "h3" | "span" | "p" = "h1";
+  export let element: "h1" | "h2" | "h3" | "h4" | "span" | "p" = "h1";
   export let style: "XL" | "L" | "M" | "S" = "XL";
   export let classes: string = "";
 
