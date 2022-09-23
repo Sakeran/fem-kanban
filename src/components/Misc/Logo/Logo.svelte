@@ -13,7 +13,7 @@
       <rect opacity="0.5" x="18" width="6" height="25" rx="2" fill="#635FC7" />
     </svg>
   </div>
-  <div class="text-black dark:text-white hidden md:block">
+  <div class="text-black dark:text-white hidden sm:block">
     <svg
       width="114"
       height="26"
@@ -29,5 +29,5 @@
       />
     </svg>
   </div>
-  <span class="sr-only">kanban</span>
+  <h1 class="sr-only">kanban</h1>
 </div>
