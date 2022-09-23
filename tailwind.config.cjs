@@ -37,6 +37,7 @@ module.exports = {
       "13p": "0.8125rem", // BodyL
       "15p": "0.9375rem", // HeadingM
       "18p": "1.125rem", // HeadingL
+      "20p": "1.25rem", // Tablet header, current board
       "24p": "1.5rem", // HeadingXL
     },
 
