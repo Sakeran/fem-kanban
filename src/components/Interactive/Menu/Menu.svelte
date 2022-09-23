@@ -110,7 +110,6 @@
   }
 
   function selectAction(actionId: string) {
-    console.log("selecting...");
     dispatch("actionClicked", actionId);
   }
 
