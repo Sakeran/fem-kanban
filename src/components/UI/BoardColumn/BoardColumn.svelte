@@ -1,27 +1,10 @@
-<script context="module" lang="ts">
-  // TODO - Factor all types into a single location
-  type Subtask = { title: string; isCompleted: string };
-
-  type Task = {
-    id: string;
-    title: string;
-    description: string;
-    status: string;
-    subtasks: Subtask[];
-  };
-
-  type BoardColumn = {
-    name: string;
-    boardColor: string;
-    tasks: Task[];
-  };
-</script>
-
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
   import Heading from "../../Typography/Heading/Heading.svelte";
   import TodoCard from "../TodoCard/TodoCard.svelte";
+
+  import type { BoardColumn } from "../../../types/boardTypes";
 
   export let columnData: BoardColumn;
 
