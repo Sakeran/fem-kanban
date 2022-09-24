@@ -30,7 +30,7 @@
 </script>
 
 <div>
-  <Heading element="h2" classes="text-gray-medium pl-6 lg:pl-8" style="S"
+  <Heading element="h2" classes="text-gray-medium pl-6 lg:pl-8 uppercase" style="S"
     >{label} {boards.length ? `(${boards.length})` : ""}
   </Heading>
   <div class="mt-5 flex flex-col">
