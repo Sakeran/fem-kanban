@@ -6,6 +6,7 @@
       "columns": [
         {
           "name": "Todo",
+          "boardColor": "#49C4E5",
           "tasks": [
             {
               "id": 0,
@@ -75,6 +76,7 @@
         },
         {
           "name": "Doing",
+          "boardColor": "#8471F2",
           "tasks": [
             {
               "id": 4,
@@ -192,6 +194,7 @@
         },
         {
           "name": "Done",
+          "boardColor": "#67E2AE",
           "tasks": [
             {
               "id": 10,
@@ -307,6 +310,7 @@
       "columns": [
         {
           "name": "Todo",
+          "boardColor": "#49C4E5",
           "tasks": [
             {
               "id": 17,
