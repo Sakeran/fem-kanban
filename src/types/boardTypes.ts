@@ -1,4 +1,4 @@
-export type Subtask = { title: string; isCompleted: string };
+export type Subtask = { title: string; isCompleted: boolean };
 
 export type Task = {
   id: string;
