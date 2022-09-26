@@ -25,9 +25,10 @@
 <style lang="postcss">
   .sidebar {
     position: absolute;
-    top: 0;
+    top: -1px;
     bottom: 0;
     left: 0;
+    z-index: 1;
 
     width: 16.25rem;
   }
