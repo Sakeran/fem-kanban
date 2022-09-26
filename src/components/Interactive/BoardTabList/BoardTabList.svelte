@@ -1,16 +1,16 @@
 <script context="module" lang="ts">
-  export type BoardTabDefinition = { name: string; id: number };
-  export type BoardTabDefinitionList = BoardTabDefinition[];
 </script>
 
 <script lang="ts">
+  import type { Board } from "../../../types/boardTypes";
+
   import { createEventDispatcher } from "svelte";
 
   import Heading from "../../Typography/Heading/Heading.svelte";
 
-  export let boards: BoardTabDefinitionList = [];
+  export let boards: Board[] = [];
   export let label: string = "All Boards";
-  export let selectedBoardId: number = undefined;
+  export let selectedBoardId: string = undefined;
 
   if (selectedBoardId === undefined && boards.length > 0)
     selectedBoardId = boards[0].id;

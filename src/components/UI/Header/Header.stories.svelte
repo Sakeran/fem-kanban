@@ -5,14 +5,17 @@
   import { expect } from "@storybook/jest";
 
   import Header from "./Header.svelte";
+  import { createAppStateContext } from "../../../stores/appStore";
+
+  import { mockAppStore } from "../../../helpers/mockAppStore";
+  createAppStateContext(mockAppStore);
+
 </script>
 
 <Meta
   title="UI/Header"
   component={Header}
   argTypes={{
-    boardName: { control: "text" },
-
     toggleBoardsMenu: { action: "toggleBoardsMenu" },
     addNewTask: { action: "addNewTask" },
     editBoard: { action: "editBoard" },
@@ -30,13 +33,13 @@
   />
 </Template>
 
-<Story name="Default" args={{ boardName: "Platform Launch" }} />
+<Story name="Default" args={{}} />
 
 <Story name="No Given Board" args={{}} />
 
 <Story
   name="Interactions (Desktop)"
-  args={{ boardName: "Platform Launch" }}
+  args={{}}
   play={async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -70,7 +73,7 @@
   parameters={{
     viewport: { viewports: INITIAL_VIEWPORTS, defaultViewport: "iphone6" },
   }}
-  args={{ boardName: "Platform Launch" }}
+  args={{}}
   play={async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
 

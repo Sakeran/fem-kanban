@@ -2,17 +2,14 @@
   import { createEventDispatcher } from "svelte";
   import Heading from "../../Typography/Heading/Heading.svelte";
 
-  export let state: "visible" | "hidden";
-
-  let sidebarExpanded: boolean;
-  $: sidebarExpanded = state === "visible";
+  export let sidebarExpanded: boolean = false;
 
   const dispatch = createEventDispatcher();
 
   function handleToggleSidebar() {
-    state = state == "visible" ? "hidden" : "visible";
+    sidebarExpanded = !sidebarExpanded;
 
-    dispatch("toggle", state);
+    dispatch("toggle", sidebarExpanded);
   }
 </script>
 

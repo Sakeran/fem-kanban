@@ -1,18 +1,19 @@
 <script lang="ts">
   import Heading from "../../Typography/Heading/Heading.svelte";
-  import type { Board } from "../../../types/boardTypes";
   import BoardColumn from "../BoardColumn/BoardColumn.svelte";
+  import { getAppState } from "../../../stores/appStore";
 
-  export let board: Board;
-  export let sidebarExpanded: boolean = false;
+  export let forceExpanded: boolean = false;
+
+  const appState = getAppState();
 </script>
 
 <!-- Columns Container -->
 <div
-  data-sidebar-expanded={sidebarExpanded || null}
+  data-sidebar-expanded={$appState.sidebarExpanded || forceExpanded || null}
   class="columns-container flex gap-6 motion-safe:transition-transform motion-safe:ease-in-out"
 >
-  {#each board.columns as column}
+  {#each $appState.currentBoard.columns as column}
     <div class="basis-[17.5rem] shrink-0">
       <BoardColumn columnData={column} />
     </div>

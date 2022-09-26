@@ -2,7 +2,10 @@
   import { Meta, Story, Template } from "@storybook/addon-svelte-csf";
   import AppLayout from "./AppLayout.svelte";
 
-  import boardData from "../../../helpers/mockData.json";
+  import { mockAppStore } from "../../../helpers/mockAppStore";
+  import { createAppStateContext } from "../../../stores/appStore";
+
+  createAppStateContext(mockAppStore);
 </script>
 
 <Meta title="UI/AppLayout" component={AppLayout} />
@@ -13,6 +16,6 @@
 
 <Story
   name="Default"
-  args={{ boardData: boardData, currentBoard: boardData.boards[0] }}
+  args={{}}
   parameters={{ layout: "fullscreen" }}
 />

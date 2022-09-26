@@ -4,10 +4,11 @@
   import Menu from "../../Interactive/Menu/Menu.svelte";
   import Button from "../../Interactive/Button/Button.svelte";
   import { createEventDispatcher } from "svelte";
-
-  export let boardName = "";
+  import { getAppState } from "../../../stores/appStore";
 
   const dispatch = createEventDispatcher();
+
+  const appStore = getAppState();
 </script>
 
 <header
@@ -21,10 +22,10 @@
 
   <div class="current-board relative flex gap-2 items-center">
     <h2
-      class:opacity-50={!boardName}
+      class:opacity-50={!$appStore.currentBoard.name}
       class="sm:ml-6 font-bold text-black dark:text-white text-18p md:text-20p lg:text-24p leading-23/18 sm:leading-auto"
     >
-      {boardName || "(No Board Selected)"}
+      {$appStore.currentBoard.name || "(No Board Selected)"}
     </h2>
     <button
       class="text-main-purple-normal hocus:text-main-purple-hover md:hidden"

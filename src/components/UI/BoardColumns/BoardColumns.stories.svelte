@@ -2,14 +2,17 @@
   import { Meta, Story, Template } from "@storybook/addon-svelte-csf";
   import BoardColumns from "./BoardColumns.svelte";
 
-  import boardData from "../../../helpers/mockData.json";
+  import { mockAppStore } from "../../../helpers/mockAppStore";
+  import { createAppStateContext } from "../../../stores/appStore";
+
+  createAppStateContext(mockAppStore);
 </script>
 
 <Meta
   title="UI/BoardColumns"
   component={BoardColumns}
   argTypes={{
-    sidebarExpanded: { control: "boolean" },
+    forceExpanded: { control: "boolean" },
   }}
 />
 
@@ -17,12 +20,6 @@
   <BoardColumns {...args} />
 </Template>
 
-<Story
-  name="Default"
-  args={{ board: boardData.boards[0], sidebarExpanded: false }}
-/>
+<Story name="Default" args={{}} />
 
-<Story
-  name="With Sidebar Expanded"
-  args={{ board: boardData.boards[0], sidebarExpanded: true }}
-/>
+<Story name="With Sidebar Expanded" args={{ forceExpanded: true }} />

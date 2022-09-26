@@ -9,7 +9,7 @@
   title="Interactive/SidebarToggle"
   component={SidebarToggle}
   argTypes={{
-    state: { options: ["visible", "hidden"], control: "radio" },
+    sidebarExpanded: { control: "boolean" },
 
     toggle: { action: "toggle" },
   }}
@@ -21,13 +21,13 @@
   </div>
 </Template>
 
-<Story name="Sidebar Visible" args={{ state: "visible" }} />
+<Story name="Sidebar Visible" args={{ sidebarExpanded: true}} />
 
-<Story name="Sidebar Hidden" args={{ state: "hidden" }} />
+<Story name="Sidebar Hidden" args={{ sidebarExpanded: false}} />
 
 <Story
   name="Toggle Sidebar"
-  args={{ state: "visible" }}
+  args={{ sidebarExpanded: true}}
   play={async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -35,11 +35,11 @@
     await userEvent.click(toggle);
 
     expect(args.toggle).toHaveBeenCalledTimes(1);
-    expect(args.toggle.mock.lastCall[0].detail).toBe("hidden");
+    expect(args.toggle.mock.lastCall[0].detail).toBe(false);
 
     await userEvent.click(toggle);
 
     expect(args.toggle).toHaveBeenCalledTimes(2);
-    expect(args.toggle.mock.lastCall[0].detail).toBe("visible");
+    expect(args.toggle.mock.lastCall[0].detail).toBe(true);
   }}
 />

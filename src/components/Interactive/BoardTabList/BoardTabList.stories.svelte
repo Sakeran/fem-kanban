@@ -3,6 +3,8 @@
   import { userEvent, within } from "@storybook/testing-library";
   import { expect } from "@storybook/jest";
   import BoardTabList from "./BoardTabList.svelte";
+
+  import { mockAppStore } from "../../../helpers/mockAppStore";
 </script>
 
 <Meta
@@ -33,22 +35,14 @@
 <Story
   name="Populated List (Default Selection)"
   args={{
-    boards: [
-      { name: "Platform Launch", id: 1 },
-      { name: "Marketing Plan", id: 2 },
-      { name: "Roadmap", id: 3 },
-    ],
+    boards: mockAppStore.boards,
   }}
 />
 
 <Story
   name="Populated List (Explicit Selection)"
   args={{
-    boards: [
-      { name: "Platform Launch", id: 1 },
-      { name: "Marketing Plan", id: 2 },
-      { name: "Roadmap", id: 3 },
-    ],
+    boards: mockAppStore.boards,
     selectedBoardId: 3,
   }}
 />
@@ -56,11 +50,7 @@
 <Story
   name="Select Board"
   args={{
-    boards: [
-      { name: "Platform Launch", id: 1 },
-      { name: "Marketing Plan", id: 2 },
-      { name: "Roadmap", id: 3 },
-    ],
+    boards: mockAppStore.boards,
     selectedBoardId: 1,
   }}
   play={async ({ args, canvasElement }) => {
@@ -79,11 +69,7 @@
 <Story
   name="Create New Board"
   args={{
-    boards: [
-      { name: "Platform Launch", id: 1 },
-      { name: "Marketing Plan", id: 2 },
-      { name: "Roadmap", id: 3 },
-    ],
+    boards: mockAppStore.boards,
     selectedBoardId: 1,
   }}
   play={async ({ args, canvasElement }) => {
