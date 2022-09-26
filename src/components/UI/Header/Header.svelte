@@ -11,10 +11,10 @@
 </script>
 
 <header
-  class="flex flex-wrap bg-white dark:bg-gray-dark sm:border-b sm:border-gray-lines-light dark:sm:border-gray-lines-dark"
+  class="flex bg-white dark:bg-gray-dark sm:border-b sm:border-gray-lines-light dark:sm:border-gray-lines-dark"
 >
   <div
-    class="px-4 py-5 sm:px-6 sm:py-7 lg:py-9 lg:pr-8 sm:border-r sm:border-gray-lines-light dark:sm:border-gray-lines-dark"
+    class="sm:min-w-[16.25rem] lg:min-w-[18.75rem] px-4 py-5 sm:px-6 sm:py-7 lg:py-9 lg:pr-8 sm:border-r sm:border-gray-lines-light dark:sm:border-gray-lines-dark"
   >
     <Logo />
   </div>
