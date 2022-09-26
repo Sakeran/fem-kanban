@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: theme("colors.main-purple.normal" / 0.5);
+
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: theme("colors.main-purple.normal");
+
+  border-radius: 4px;
+}
+
+@supports (scrollbar-width: thin) {
+  * {
+    scrollbar-color: theme("colors.main-purple.normal")
+      theme("colors.main-purple.normal" / 0.5);
+    scrollbar-width: thin;
+  }
+}
