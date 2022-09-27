@@ -3,13 +3,18 @@
   import { userEvent, within } from "@storybook/testing-library";
   import { expect } from "@storybook/jest";
   import ViewTaskCard from "./ViewTaskCard.svelte";
+  import { createMockBoards } from "../../../helpers/mocks";
+
+  const board = createMockBoards()[0];
+  const task = board.columns[0].tasks[0];
 </script>
 
 <Meta
   title="UI/ViewTaskCard"
   component={ViewTaskCard}
   argTypes={{
-    updateTask: { action: "updateTask" },
+    toggleSubtask: { action: "toggleSubtask" },
+    updateStatus: { action: "updateStatus" },
     editTask: { action: "editTask" },
     deleteTask: { action: "deleteTask" },
   }}
@@ -21,7 +26,8 @@
   >
     <ViewTaskCard
       {...args}
-      on:updateTask={args.updateTask}
+      on:toggleSubtask={args.toggleSubtask}
+      on:updateStatus={args.updateStatus}
       on:editTask={args.editTask}
       on:deleteTask={args.deleteTask}
     />
@@ -31,56 +37,22 @@
 <Story
   name="Default"
   args={{
-    title:
-      "Research pricing points of various competitors and trial different business models",
-    description:
-      "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-
-    subtasks: [
-      {
-        title: "Research competitor pricing and business models",
-        isComplete: false,
-      },
-      {
-        title: "Outline a business model that works for our solution",
-        isComplete: false,
-      },
-      { title: "Surveying and testing", isComplete: false },
-    ],
-
-    boardColumns: ["Todo", "Doing", "Done"],
-    status: "Todo",
+    task,
+    board,
   }}
 />
 
 <Story
   name="Update Task"
   args={{
-    title:
-      "Research pricing points of various competitors and trial different business models",
-    description:
-      "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-
-    subtasks: [
-      {
-        title: "Research competitor pricing and business models",
-        isComplete: false,
-      },
-      {
-        title: "Outline a business model that works for our solution",
-        isComplete: false,
-      },
-      { title: "Surveying and testing", isComplete: false },
-    ],
-
-    boardColumns: ["Todo", "Doing", "Done"],
-    status: "Todo",
+    task,
+    board,
   }}
   play={async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const updateTaskFn = args.updateTask;
-    const toggleTaskFn = args.toggleTaskMenu;
+    const updateStatusFn = args.updateStatus;
+    const toggleSubtaskFn = args.toggleSubtask;
 
     // Get Inputs
     const toggleButton = canvas.getByText("Options Menu");
@@ -91,21 +63,23 @@
     expect(subtaskToggles).toHaveLength(3);
 
     await userEvent.click(subtaskToggles[0]);
-    expect(updateTaskFn).toHaveBeenCalledTimes(1);
+    expect(toggleSubtaskFn).toHaveBeenCalledTimes(1);
 
-    let { detail } = updateTaskFn.mock.lastCall[0];
-    expect(detail.subtasks[0].isComplete).toBe(true);
+    let { detail } = toggleSubtaskFn.mock.lastCall[0];
+    expect(detail.subtaskTitle).toBe(task.subtasks[0].title);
+    expect(detail.task).toBe(task);
 
     await userEvent.click(subtaskToggles[0]);
-    expect(updateTaskFn).toHaveBeenCalledTimes(2);
+    expect(toggleSubtaskFn).toHaveBeenCalledTimes(2);
 
-    detail = updateTaskFn.mock.lastCall[0].detail;
-    expect(detail.subtasks[0].isComplete).toBe(false);
+    detail = toggleSubtaskFn.mock.lastCall[0].detail;
+    expect(detail.subtaskTitle).toBe(task.subtasks[0].title);
+    expect(detail.task).toBe(task);
 
     // Update Status
     await userEvent.selectOptions(statusSelect, "Doing");
 
-    detail = updateTaskFn.mock.lastCall[0].detail;
+    detail = updateStatusFn.mock.lastCall[0].detail;
     expect(detail.status).toBe("Doing");
 
     // Toggle Menu
@@ -113,6 +87,5 @@
 
     // Confirm that menu exists
     canvas.getByRole("menu");
-    
   }}
 />
