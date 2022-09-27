@@ -9,13 +9,7 @@
   setCurrentBoardId("0");
 </script>
 
-<Meta
-  title="UI/BoardColumns"
-  component={BoardColumns}
-  argTypes={{
-    forceExpanded: { control: "boolean" },
-  }}
-/>
+<Meta title="UI/BoardColumns" component={BoardColumns} />
 
 <Template let:args>
   <BoardColumns {...args} />
@@ -23,4 +17,3 @@
 
 <Story name="Default" args={{}} />
 
-<Story name="With Sidebar Expanded" args={{ forceExpanded: true }} />

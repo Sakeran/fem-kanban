@@ -1,16 +1,11 @@
 <script lang="ts">
   import Heading from "../../Typography/Heading/Heading.svelte";
   import BoardColumn from "../BoardColumn/BoardColumn.svelte";
-  import { sidebarExpanded } from "../../../stores/appControls";
   import { currentBoard } from "../../../stores/boardData";
-
-
-  export let forceExpanded: boolean = false;
 </script>
 
 <!-- Columns Container -->
 <div
-  data-sidebar-expanded={$sidebarExpanded || forceExpanded || null}
   class="columns-container flex gap-6 motion-safe:transition-transform motion-safe:ease-in-out"
 >
   {#if $currentBoard}
@@ -32,20 +27,6 @@
 </div>
 
 <style lang="postcss">
-  .columns-container {
-    transform: translateX(0);
-  }
-
-  .columns-container[data-sidebar-expanded="true"] {
-    transform: translateX(16.25rem);
-  }
-
-  @media (min-width: 64em) {
-    .columns-container[data-sidebar-expanded="true"] {
-      transform: translateX(18.75rem);
-    }
-  }
-
   .new-column-button {
     background: linear-gradient(to bottom, hsl(219 62% 95%), hsl(220 60% 96%));
 
