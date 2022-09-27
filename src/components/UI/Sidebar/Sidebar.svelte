@@ -7,6 +7,10 @@
   import { boards } from "../../../stores/boardData";
 
   export let forceExpanded: boolean = false;
+
+  function handleToggle(e) {
+    sidebarExpanded.set(e.detail);
+  }
 </script>
 
 <div
@@ -17,7 +21,10 @@
   <div
     class="sidebar-toggle hidden sm:block order-last motion-safe:transition-transform motion-safe:ease-in-out"
   >
-    <SidebarToggle sidebarExpanded={$sidebarExpanded || forceExpanded} />
+    <SidebarToggle
+      sidebarExpanded={$sidebarExpanded || forceExpanded}
+      on:toggle={handleToggle}
+    />
   </div>
 
   <BoardTabList boards={$boards} />
