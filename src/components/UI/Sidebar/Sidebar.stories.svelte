@@ -2,10 +2,11 @@
   import { Meta, Story, Template } from "@storybook/addon-svelte-csf";
   import Sidebar from "./Sidebar.svelte";
 
-  import { createAppStateContext } from "../../../stores/appStore";
+  import { createMockBoards } from "../../../helpers/mocks";
+  import { loadBoards, setCurrentBoardId } from "../../../stores/boardData";
 
-  import { mockAppStore } from "../../../helpers/mockAppStore";
-  createAppStateContext(mockAppStore);
+  loadBoards(createMockBoards());
+  setCurrentBoardId("0");
 </script>
 
 <Meta

@@ -2,25 +2,25 @@
   import ThemeToggle from "../../Interactive/ThemeToggle/ThemeToggle.svelte";
   import SidebarToggle from "../../Interactive/SidebarToggle/SidebarToggle.svelte";
   import BoardTabList from "../../Interactive/BoardTabList/BoardTabList.svelte";
-  import { getAppState } from "../../../stores/appStore";
+
+  import { sidebarExpanded } from "../../../stores/appControls";
+  import { boards } from "../../../stores/boardData";
 
   export let forceExpanded: boolean = false;
-  
-  const appState = getAppState();
 </script>
 
 <div
-  data-expanded={$appState.sidebarExpanded || forceExpanded}
+  data-expanded={$sidebarExpanded || forceExpanded}
   data-testid="sidebar"
   class="sidebar bg-white dark:bg-gray-dark py-8 flex flex-col border-r border-gray-lines-light dark:border-gray-lines-dark motion-safe:transition-transform motion-safe:ease-in-out"
 >
   <div
     class="sidebar-toggle hidden sm:block order-last motion-safe:transition-transform motion-safe:ease-in-out"
   >
-    <SidebarToggle sidebarExpanded={$appState.sidebarExpanded || forceExpanded} />
+    <SidebarToggle sidebarExpanded={$sidebarExpanded || forceExpanded} />
   </div>
 
-  <BoardTabList boards={$appState.boards} />
+  <BoardTabList boards={$boards} />
   <div class="px-6 mt-auto mb-4"><ThemeToggle /></div>
 </div>
 

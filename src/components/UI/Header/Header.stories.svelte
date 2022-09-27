@@ -5,11 +5,12 @@
   import { expect } from "@storybook/jest";
 
   import Header from "./Header.svelte";
-  import { createAppStateContext } from "../../../stores/appStore";
 
-  import { mockAppStore } from "../../../helpers/mockAppStore";
-  createAppStateContext(mockAppStore);
+  import { createMockBoards } from "../../../helpers/mocks";
+  import { loadBoards, setCurrentBoardId } from "../../../stores/boardData";
 
+  loadBoards(createMockBoards());
+  setCurrentBoardId("0");
 </script>
 
 <Meta

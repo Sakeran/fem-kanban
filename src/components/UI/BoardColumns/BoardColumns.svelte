@@ -1,23 +1,25 @@
 <script lang="ts">
   import Heading from "../../Typography/Heading/Heading.svelte";
   import BoardColumn from "../BoardColumn/BoardColumn.svelte";
-  import { getAppState } from "../../../stores/appStore";
+  import { sidebarExpanded } from "../../../stores/appControls";
+  import { currentBoard } from "../../../stores/boardData";
+
 
   export let forceExpanded: boolean = false;
-
-  const appState = getAppState();
 </script>
 
 <!-- Columns Container -->
 <div
-  data-sidebar-expanded={$appState.sidebarExpanded || forceExpanded || null}
+  data-sidebar-expanded={$sidebarExpanded || forceExpanded || null}
   class="columns-container flex gap-6 motion-safe:transition-transform motion-safe:ease-in-out"
 >
-  {#each $appState.currentBoard.columns as column}
-    <div class="basis-[17.5rem] shrink-0">
-      <BoardColumn columnData={column} />
-    </div>
-  {/each}
+  {#if $currentBoard}
+    {#each $currentBoard.columns || [] as column}
+      <div class="basis-[17.5rem] shrink-0">
+        <BoardColumn columnData={column} />
+      </div>
+    {/each}
+  {/if}
   <!-- Add Columns Button -->
   <div class="relative basis-[17.5rem] shrink-0">
     <button

@@ -1,10 +1,9 @@
 <script lang="ts">
+  import type BoardColumn from "../../../lib/board/boardColumn";
   import { createEventDispatcher } from "svelte";
 
   import Heading from "../../Typography/Heading/Heading.svelte";
   import TodoCard from "../TodoCard/TodoCard.svelte";
-
-  import type { BoardColumn } from "../../../types/boardTypes";
 
   export let columnData: BoardColumn;
 

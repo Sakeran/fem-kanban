@@ -2,7 +2,9 @@
   import { Meta, Story, Template } from "@storybook/addon-svelte-csf";
   import BoardColumn from "./BoardColumn.svelte";
 
-  import { mockAppStore } from "../../../helpers/mockAppStore";
+  import { createMockColumn } from "../../../helpers/mocks";
+
+  const column = createMockColumn();
 </script>
 
 <Meta
@@ -22,13 +24,13 @@
 <Story
   name="Empty"
   args={{
-    columnData: { ...mockAppStore.boards[0].columns[0], tasks: [] },
+    columnData: { ...column, tasks: [] },
   }}
 />
 
 <Story
   name="With Tasks"
   args={{
-    columnData: mockAppStore.boards[0].columns[0],
+    columnData: column,
   }}
 />
