@@ -12,8 +12,12 @@
   export let style: "XL" | "L" | "M" | "S" = "XL";
   export let classes: string = "";
 
+  export let id: string = "";
+
   let classList = styles[style];
   if (classes) classList += " " + classes;
 </script>
 
-<svelte:element this={element} class={classList}><slot /></svelte:element>
+<svelte:element this={element} id={id || null} class={classList}
+  ><slot /></svelte:element
+>
