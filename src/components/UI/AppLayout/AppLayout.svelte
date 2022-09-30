@@ -1,14 +1,42 @@
 <script lang="ts">
-  import { sidebarExpanded } from "../../../stores/appControls";
+  import BoardTabList from "../../Interactive/BoardTabList/BoardTabList.svelte";
+  import ThemeToggle from "../../Interactive/ThemeToggle/ThemeToggle.svelte";
+  import { colorScheme, sidebarExpanded } from "../../../stores/appControls";
   import BoardColumns from "../BoardColumns/BoardColumns.svelte";
   import Header from "../Header/Header.svelte";
   import Sidebar from "../Sidebar/Sidebar.svelte";
+  import { boards } from "../../../stores/boardData";
+
+  let mobileMenuVisible: boolean = false;
 </script>
 
 <div class="app-layout bg-gray-light dark:bg-gray-very-dark">
-  <div class="app-layout-header"><Header /></div>
+  <div class="app-layout-header">
+    <Header
+      on:toggleBoardsMenu={() => (mobileMenuVisible = !mobileMenuVisible)}
+    />
+  </div>
   <main class="app-layout-content">
-    <div data-sidebar-expanded={$sidebarExpanded} class="app-layout-sidebar hidden sm:block">
+    <!-- Mobile Menu -->
+    <div
+      data-visible={mobileMenuVisible || null}
+      class="app-layout-mobile-menu absolute inset-0 bg-black/50 z-10 pt-4 sm:hidden"
+      on:click|self={() => (mobileMenuVisible = false)}
+    >
+      <div
+        class="bg-white dark:bg-gray-dark py-4 max-w-[16.5rem] mx-auto flex flex-col gap-4 rounded-lg"
+      >
+        <BoardTabList boards={$boards} />
+        <div class="px-6 mt-auto mb-4">
+          <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />
+        </div>
+      </div>
+    </div>
+
+    <div
+      data-sidebar-expanded={$sidebarExpanded}
+      class="app-layout-sidebar hidden sm:block"
+    >
       <Sidebar />
     </div>
     <div class="app-layout-columns relative">
@@ -25,6 +53,18 @@
     flex-direction: column;
 
     min-height: 100vh;
+  }
+
+  .app-layout-mobile-menu {
+    visibility: hidden;
+  }
+
+  .app-layout-mobile-menu > div {
+    box-shadow: 0 0.25rem 0.375rem hsl(217 36% 33% / 0.115);
+  }
+
+  .app-layout-mobile-menu[data-visible] {
+    visibility: visible;
   }
 
   .app-layout-content {

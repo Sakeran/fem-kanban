@@ -11,10 +11,6 @@
   function handleToggle(e) {
     sidebarExpanded.set(e.detail);
   }
-
-  function handleThemeToggle(e) {
-    colorScheme.set(e.detail);
-  }
 </script>
 
 <div
@@ -33,7 +29,7 @@
 
   <BoardTabList boards={$boards} />
   <div class="px-6 mt-auto mb-4">
-    <ThemeToggle on:toggled={handleThemeToggle} />
+    <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />
   </div>
 </div>
 

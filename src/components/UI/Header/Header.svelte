@@ -9,7 +9,16 @@
   let currentBoardName: string;
   $: currentBoardName = $currentBoard ? $currentBoard.name : "";
 
+  // Note: toggledBoard is just used to update the chevron icon, and isn't
+  // synced to anything outside this component.
+  let toggledBoard: boolean = false;
+
   const dispatch = createEventDispatcher();
+
+  function handleToggleBoards() {
+    dispatch("toggleBoardsMenu");
+    toggledBoard = !toggledBoard;
+  }
 </script>
 
 <header
@@ -24,14 +33,16 @@
   <div class="current-board relative flex gap-2 items-center">
     <h2
       class:opacity-50={!$currentBoard}
-      class="sm:ml-6 font-bold text-black dark:text-white text-18p md:text-20p lg:text-24p leading-23/18 sm:leading-auto"
+      class="sm:ml-6 font-bold text-black dark:text-white text-18p sm:text-20p lg:text-24p leading-23/18 sm:leading-auto"
     >
       {currentBoardName || "(No Board Selected)"}
     </h2>
     <button
-      class="text-main-purple-normal hocus:text-main-purple-hover md:hidden"
-      on:click={() => dispatch("toggleBoardsMenu")}
+      class="text-main-purple-normal hocus:text-main-purple-hover sm:hidden"
+      on:click={handleToggleBoards}
       ><svg
+        data-toggled={toggledBoard || null}
+        class="[&[data-toggled]]:-rotate-180 motion-safe:transition-transform motion-safe:ease-in-out"
         width="9"
         height="7"
         viewBox="0 0 9 7"
