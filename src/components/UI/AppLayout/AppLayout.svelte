@@ -11,7 +11,7 @@
 </script>
 
 <div class="app-layout bg-gray-light dark:bg-gray-very-dark">
-  <div class="app-layout-header">
+  <div class="app-layout-header z-20">
     <Header
       on:toggleBoardsMenu={() => (mobileMenuVisible = !mobileMenuVisible)}
     />
@@ -49,6 +49,8 @@
 
 <style lang="postcss">
   .app-layout {
+    position: relative;
+
     display: flex;
     flex-direction: column;
 
