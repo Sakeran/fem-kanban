@@ -51,6 +51,7 @@
     const addTaskButton = canvas
       .getAllByText("Add New Task")
       .map((e) => e.closest("button"))[1];
+
     expect(addTaskButton).toBeVisible();
 
     // Get the options menu button
@@ -85,6 +86,9 @@
     const addTaskButton = canvas
       .getAllByText("Add New Task")
       .map((e) => e.closest("button"))[0];
+
+    // Note: This assertion seems to fail when the story is first loaded, and only then.
+    // Remounting the component via the app controls consistently shows the button as visible at this point.
     expect(addTaskButton).toBeVisible();
 
     // Get the options menu button

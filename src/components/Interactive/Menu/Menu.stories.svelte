@@ -75,9 +75,17 @@
     await userEvent.click(toggleButton);
     let menu = canvas.getByRole("menu");
 
+    // Wait for menu to be visible.
+    // (This takes a little longer to account for the transition animation)
+    await new Promise((r) => setTimeout(r, 200));
     expect(menu).toBeVisible();
 
     await userEvent.click(toggleButton);
+
+    // Wait for menu to become invisible
+    // (This takes a little longer to account for the transition animation)
+    await new Promise((r) => setTimeout(r, 200));
+
     menu = canvas.queryByRole("menu");
     expect(menu).toBeNull();
   }}
@@ -106,6 +114,9 @@
 
     let menu = canvas.getByRole("menu");
 
+    // Wait for menu to be visible.
+    // (This takes a little longer to account for the transition animation)
+    await new Promise((r) => setTimeout(r, 200));
     expect(menu).toBeVisible();
 
     // Get menu buttons
@@ -117,6 +128,11 @@
 
     // Menu should be cleared on ESC
     await userEvent.keyboard("{Escape}");
+
+    // Wait for menu to become invisible
+    // (This takes a little longer to account for the transition animation)
+    await new Promise((r) => setTimeout(r, 200));
+
     menu = canvas.queryByRole("menu");
     expect(menu).toBeNull();
   }}
@@ -142,6 +158,9 @@
     await userEvent.click(toggleButton);
     let menu = canvas.getByRole("menu");
 
+    // Wait for menu to be visible.
+    // (This takes a little longer to account for the transition animation)
+    await new Promise((r) => setTimeout(r, 200));
     expect(menu).toBeVisible();
 
     const menuButtons = within(menu).getAllByRole("button");
@@ -180,6 +199,9 @@
 
     let menu = canvas.getByRole("menu");
 
+    // Wait for menu to be visible.
+    // (This takes a little longer to account for the transition animation)
+    await new Promise((r) => setTimeout(r, 200));
     expect(menu).toBeVisible();
 
     // Get menu buttons
