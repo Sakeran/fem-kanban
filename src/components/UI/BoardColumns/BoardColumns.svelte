@@ -2,6 +2,7 @@
   import Heading from "../../Typography/Heading/Heading.svelte";
   import BoardColumn from "../BoardColumn/BoardColumn.svelte";
   import { currentBoard } from "../../../stores/boardData";
+  import Button from "../../Interactive/Button/Button.svelte";
 </script>
 
 <!-- Columns Container -->
@@ -9,21 +10,43 @@
   class="columns-container flex gap-6 motion-safe:transition-transform motion-safe:ease-in-out"
 >
   {#if $currentBoard}
-    {#each $currentBoard.columns || [] as column}
-      <div class="basis-[17.5rem] shrink-0">
-        <BoardColumn columnData={column} />
+    {#if $currentBoard.columns.length > 0}
+      {#each $currentBoard.columns || [] as column}
+        <div class="basis-[17.5rem] shrink-0">
+          <BoardColumn columnData={column} />
+        </div>
+      {/each}
+      <!-- Add Columns Button -->
+      <div class="relative basis-[17.5rem] shrink-0">
+        <button
+          class="new-column-button absolute top-0 bottom-0 left-0 w-full rounded-sm grid place-items-center text-gray-medium hocus:text-main-purple-normal"
+          ><Heading style="XL" classes="z-10"
+            ><span aria-hidden="true">+</span> New Column</Heading
+          ></button
+        >
       </div>
-    {/each}
+    {:else}
+      <div class="text-gray-medium">
+        <Heading element="p" style="L"
+          >This board is empty. Create a new column to get started.</Heading
+        >
+
+        <Button style="PrimaryNarrow" on:click={() => console.log("TODO")}
+          ><span><span aria-hidden="true">+ </span>Add New Column</span></Button
+        >
+      </div>
+    {/if}
+  {:else}
+    <div class="absolute inset-0 flex flex-col items-center justify-center gap-6 lg:gap-8 text-gray-medium">
+      <Heading element="p" style="L"
+        >You haven't yet created any boards. Create a new board to get started.</Heading
+      >
+
+      <Button style="PrimaryNarrow" on:click={() => console.log("TODO")}
+        ><span><span aria-hidden="true">+ </span>Add New Board</span></Button
+      >
+    </div>
   {/if}
-  <!-- Add Columns Button -->
-  <div class="relative basis-[17.5rem] shrink-0">
-    <button
-      class="new-column-button absolute top-0 bottom-0 left-0 w-full rounded-sm grid place-items-center text-gray-medium hocus:text-main-purple-normal"
-      ><Heading style="XL" classes="z-10"
-        ><span aria-hidden="true">+</span> New Column</Heading
-      ></button
-    >
-  </div>
 </div>
 
 <style lang="postcss">
