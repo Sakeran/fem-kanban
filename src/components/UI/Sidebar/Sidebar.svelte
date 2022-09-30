@@ -4,7 +4,7 @@
   import BoardTabList from "../../Interactive/BoardTabList/BoardTabList.svelte";
 
   import { colorScheme, sidebarExpanded } from "../../../stores/appControls";
-  import { boards } from "../../../stores/boardData";
+  import { boards, setCurrentBoardId } from "../../../stores/boardData";
 
   export let forceExpanded: boolean = false;
 
@@ -27,7 +27,10 @@
     />
   </div>
 
-  <BoardTabList boards={$boards} />
+  <BoardTabList
+    boards={$boards}
+    on:boardSelected={(e) => setCurrentBoardId(e.detail)}
+  />
   <div class="px-6 mt-auto mb-4">
     <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />
   </div>
