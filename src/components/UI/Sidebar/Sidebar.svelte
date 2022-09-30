@@ -3,13 +3,17 @@
   import SidebarToggle from "../../Interactive/SidebarToggle/SidebarToggle.svelte";
   import BoardTabList from "../../Interactive/BoardTabList/BoardTabList.svelte";
 
-  import { sidebarExpanded } from "../../../stores/appControls";
+  import { colorScheme, sidebarExpanded } from "../../../stores/appControls";
   import { boards } from "../../../stores/boardData";
 
   export let forceExpanded: boolean = false;
 
   function handleToggle(e) {
     sidebarExpanded.set(e.detail);
+  }
+
+  function handleThemeToggle(e) {
+    colorScheme.set(e.detail);
   }
 </script>
 
@@ -28,7 +32,9 @@
   </div>
 
   <BoardTabList boards={$boards} />
-  <div class="px-6 mt-auto mb-4"><ThemeToggle /></div>
+  <div class="px-6 mt-auto mb-4">
+    <ThemeToggle on:toggled={handleThemeToggle} />
+  </div>
 </div>
 
 <style lang="postcss">
