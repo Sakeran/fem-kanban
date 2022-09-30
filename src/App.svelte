@@ -1,6 +1,5 @@
 <script lang="ts">
+  import AppLayout from "./components/UI/AppLayout/AppLayout.svelte";
 </script>
 
-<main>
-    <h1>Kanban App (With Firebase Hosting)</h1>
-</main>
+<AppLayout />

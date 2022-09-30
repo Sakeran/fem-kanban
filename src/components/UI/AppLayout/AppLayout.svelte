@@ -5,9 +5,9 @@
   import Sidebar from "../Sidebar/Sidebar.svelte";
 </script>
 
-<div class="app-layout">
+<div class="app-layout bg-gray-light dark:bg-gray-very-dark">
   <div class="app-layout-header"><Header /></div>
-  <div class="app-layout-content">
+  <main class="app-layout-content">
     <div data-sidebar-expanded={$sidebarExpanded} class="app-layout-sidebar hidden sm:block">
       <Sidebar />
     </div>
@@ -16,7 +16,7 @@
         <BoardColumns />
       </div>
     </div>
-  </div>
+  </main>
 </div>
 
 <style lang="postcss">
