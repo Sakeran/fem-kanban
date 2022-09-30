@@ -63,7 +63,7 @@
     expect(args.boardSelected).toHaveBeenCalled();
 
     const { detail: boardId } = args.boardSelected.mock.lastCall[0];
-    expect(boardId).toBe(2);
+    expect(boardId).toBe("1");
   }}
 />
 
