@@ -1,4 +1,4 @@
-import { getContext, onDestroy, setContext } from "svelte";
+import { onDestroy } from "svelte";
 
 import type { EventCallback, Events, EventTypes } from "../types/events";
 
@@ -28,16 +28,4 @@ export class EventBus {
   }
 }
 
-export function createEventBusContext(key = "eventBus") {
-  const bus = new EventBus();
-
-  setContext(key, bus);
-  return bus;
-}
-
-export function getEventBus(key = "eventBus") {
-  const bus = getContext(key) as EventBus;
-  if (!bus) throw new Error("Failed to get event bus from context");
-
-  return bus;
-}
+export const eventBus = new EventBus();
