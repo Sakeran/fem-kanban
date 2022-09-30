@@ -6,8 +6,6 @@
   import { createEventDispatcher } from "svelte";
   import { currentBoard } from "../../../stores/boardData";
 
-  console.log($currentBoard);
-
   let currentBoardName: string;
   $: currentBoardName = $currentBoard ? $currentBoard.name : "";
 

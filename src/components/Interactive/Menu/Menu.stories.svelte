@@ -210,7 +210,6 @@
     expect(args.actionClicked).toHaveBeenCalledTimes(0);
 
     await userEvent.keyboard(" ");
-    console.log(args.actionClicked.mock);
     expect(args.actionClicked).toHaveBeenCalled();
     expect(args.actionClicked.mock.lastCall[0].detail).toBe("edit");
 
