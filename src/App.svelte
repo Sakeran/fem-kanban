@@ -16,7 +16,7 @@
   }
 
   // TEMP: Setup board data
-  loadBoards(mockBoardData.map((data) => Board.createFromData(data)));
+  loadBoards(mockBoardData.map(data => new Board(data)));
 </script>
 
 <AppLayout />

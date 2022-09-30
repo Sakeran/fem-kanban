@@ -7,19 +7,18 @@ export type BoardData = {
   columns: BoardColumnData[];
 };
 
-export default class Board {
-  constructor(
-    readonly id: string,
-    readonly name: string,
-    readonly columns: BoardColumn[]
-  ) {}
 
-  static createFromData(data: BoardData) {
-    return new Board(
-      data.id,
-      data.name,
-      data.columns.map((cd) => BoardColumn.createFromData(cd))
-    );
+export default class Board {
+  readonly id;
+  readonly name;
+
+  public columns: BoardColumn[];
+
+  constructor(boardData: BoardData) {
+    this.id = boardData.id;
+    this.name = boardData.name;
+
+    this.columns = boardData.columns.map((cd) => new BoardColumn(cd, this));
   }
 
   serializeToData() {

@@ -1,3 +1,4 @@
+import type Board from "./board";
 import type { TaskData } from "./task";
 import Task from "./task";
 
@@ -9,20 +10,18 @@ export type BoardColumnData = {
 };
 
 export default class BoardColumn {
-  constructor(
-    readonly id: string,
-    readonly name: string,
-    readonly boardColor: string,
-    readonly tasks: Task[]
-  ) {}
+  readonly id;
+  readonly name;
+  readonly boardColor;
 
-  static createFromData(data: BoardColumnData) {
-    return new BoardColumn(
-      data.id,
-      data.name,
-      data.boardColor,
-      data.tasks.map((td) => Task.createFromData(td))
-    );
+  public tasks;
+
+  constructor(columnData, readonly board: Board) {
+    this.id = columnData.id;
+    this.name = columnData.name;
+    this.boardColor = columnData.boardColor;
+
+    this.tasks = columnData.tasks.map((td) => new Task(td, this, board));
   }
 
   serializeToData() {

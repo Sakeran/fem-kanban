@@ -1,3 +1,6 @@
+import type Board from "./board";
+import type BoardColumn from "./boardColumn";
+
 type Subtask = { title: string; isCompleted: boolean };
 
 export type TaskData = {
@@ -10,15 +13,37 @@ export type TaskData = {
 
 export default class Task {
   constructor(
-    readonly id: string,
-    readonly title: string,
-    readonly description: string,
-    readonly status: string,
-    readonly subtasks: Subtask[]
+    private data: TaskData,
+    private parentColumn: BoardColumn,
+    private parentBoard: Board
   ) {}
 
-  static createFromData(data: TaskData) {
-    return new Task(data.id, data.title, data.description, data.status, data.subtasks);
+  get id() {
+    return this.data.id;
+  }
+
+  get title() {
+    return this.data.title;
+  }
+
+  get description() {
+    return this.data.description;
+  }
+
+  get status() {
+    return this.data.status;
+  }
+
+  get subtasks() {
+    return this.data.subtasks;
+  }
+
+  get board() {
+    return this.parentBoard;
+  }
+
+  get column() {
+    return this.parentColumn;
   }
 
   serializeToData() {
