@@ -4,12 +4,13 @@
 
   import Heading from "../../Typography/Heading/Heading.svelte";
   import TodoCard from "../TodoCard/TodoCard.svelte";
+  import type Task from "../../../lib/board/task"
 
   export let columnData: BoardColumn;
 
   const dispatch = createEventDispatcher();
-  function handleTaskSelect(taskId: string) {
-    dispatch("taskSelected", taskId);
+  function handleTaskSelect(task: Task) {
+    dispatch("taskSelected", task);
   }
 </script>
 
@@ -30,7 +31,7 @@
     {#each columnData.tasks as task}
       <div>
         <TodoCard
-          on:click={() => handleTaskSelect(task.id)}
+          on:click={() => handleTaskSelect(task)}
           title={task.title}
           subtaskTotal={task.subtasks.length}
           subtasksCompleted={task.subtasks.filter((st) => st.isCompleted)

@@ -45,6 +45,7 @@
 
 <style lang="postcss" global>
   #kanban-modal-portal {
+    z-index: 9999;
     position: absolute;
     top: 0;
     left: 0;

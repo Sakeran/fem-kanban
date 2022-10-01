@@ -3,6 +3,11 @@
   import BoardColumn from "../BoardColumn/BoardColumn.svelte";
   import { currentBoard } from "../../../stores/boardData";
   import Button from "../../Interactive/Button/Button.svelte";
+  import { eventBus } from "../../../lib/eventBus";
+
+  function handleTaskSelected(e) {
+    eventBus.dispatch("viewTask", e.detail);
+  }
 </script>
 
 <!-- Columns Container -->
@@ -13,7 +18,10 @@
     {#if $currentBoard.columns.length > 0}
       {#each $currentBoard.columns || [] as column}
         <div class="basis-[17.5rem] shrink-0">
-          <BoardColumn columnData={column} />
+          <BoardColumn
+            columnData={column}
+            on:taskSelected={handleTaskSelected}
+          />
         </div>
       {/each}
       <!-- Add Columns Button -->
@@ -37,7 +45,9 @@
       </div>
     {/if}
   {:else}
-    <div class="absolute inset-0 flex flex-col items-center justify-center gap-6 lg:gap-8 text-gray-medium">
+    <div
+      class="absolute inset-0 flex flex-col items-center justify-center gap-6 lg:gap-8 text-gray-medium"
+    >
       <Heading element="p" style="L"
         >You haven't yet created any boards. Create a new board to get started.</Heading
       >
