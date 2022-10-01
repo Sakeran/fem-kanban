@@ -4,7 +4,8 @@ import type Task from "src/lib/board/task";
  * Mapping of event names to payloads
  */
 export type EventTypes = {
-  viewTask: Task
+  taskUpdated: Task;
+  viewTask: Task;
 };
 
 export type Events = keyof EventTypes;

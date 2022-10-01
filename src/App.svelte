@@ -27,6 +27,7 @@
   eventBus.on("viewTask", (task) => {
     currentlyViewedTask = task;
   });
+   
 </script>
 
 <!-- App Layout -->
@@ -39,7 +40,10 @@
 >
   <div class="w-screen max-w-[30rem] mx-auto p-4 box-content">
     <ViewTaskCard
-      on:toggleSubtask={() => console.log("toggle")}
+      on:editTask={() => console.log("TODO")}
+      on:deleteTask={() => console.log("TODO")}
+      on:toggleSubtask={({detail: {task, subtaskTitle}}) => task.toggleSubtask(subtaskTitle)}
+      on:updateStatus={({detail: {task, status}}) => task.updateStatus(status)}
       task={currentlyViewedTask}
     />
   </div>
