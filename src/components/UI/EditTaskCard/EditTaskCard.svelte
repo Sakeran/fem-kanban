@@ -11,7 +11,7 @@
 
   export let cardTitle: string = "Add New Task";
   export let submitButtonText: string = "Create Task";
-  export let boardColumns: [string, ...string[]];
+  export let boardColumns: string[];
 
   export let title = "";
   export let description = "";

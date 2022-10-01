@@ -2,7 +2,7 @@ import { eventBus } from "../eventBus";
 import type Board from "./board";
 import type BoardColumn from "./boardColumn";
 
-type Subtask = { title: string; isCompleted: boolean };
+export type Subtask = { title: string; isCompleted: boolean };
 
 export type TaskData = {
   id: string;
@@ -13,11 +13,15 @@ export type TaskData = {
 };
 
 export default class Task {
+  private data: TaskData;
+
   constructor(
-    private data: TaskData,
+    data: TaskData,
     private parentColumn: BoardColumn,
     private parentBoard: Board
-  ) {}
+  ) {
+    this.data = { ...data };
+  }
 
   get id() {
     return this.data.id;
@@ -33,6 +37,10 @@ export default class Task {
 
   get status() {
     return this.data.status;
+  }
+
+  set status(newStatus) {
+    this.data.status = newStatus;
   }
 
   get subtasks() {

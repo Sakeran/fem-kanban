@@ -24,6 +24,11 @@ export default class BoardColumn {
     this.tasks = columnData.tasks.map((td) => new Task(td, this, board));
   }
 
+  addTask(task: Task) {
+    task.status = this.name;
+    this.tasks.push(task);
+  }
+
   serializeToData() {
     return {
       id: this.id,

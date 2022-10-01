@@ -1,3 +1,4 @@
+import type Board from "src/lib/board/board";
 import type Task from "src/lib/board/task";
 
 /**
@@ -5,7 +6,9 @@ import type Task from "src/lib/board/task";
  */
 export type EventTypes = {
   taskUpdated: Task;
+  boardUpdated: Board;
   viewTask: Task;
+  addNewTask: void;
 };
 
 export type Events = keyof EventTypes;

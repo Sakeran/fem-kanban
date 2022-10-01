@@ -6,6 +6,7 @@
   import Header from "../Header/Header.svelte";
   import Sidebar from "../Sidebar/Sidebar.svelte";
   import { boards, setCurrentBoardId } from "../../../stores/boardData";
+  import { eventBus } from "../../../lib/eventBus";
 
   let mobileMenuVisible: boolean = false;
 </script>
@@ -14,6 +15,7 @@
   <div class="app-layout-header z-20">
     <Header
       on:toggleBoardsMenu={() => (mobileMenuVisible = !mobileMenuVisible)}
+      on:addNewTask={() => eventBus.dispatch("addNewTask")}
     />
   </div>
   <main class="app-layout-content">
@@ -26,7 +28,10 @@
       <div
         class="bg-white dark:bg-gray-dark py-4 max-w-[16.5rem] mx-auto flex flex-col gap-4 rounded-lg"
       >
-        <BoardTabList boards={$boards} on:boardSelected={(e) => setCurrentBoardId(e.detail)} />
+        <BoardTabList
+          boards={$boards}
+          on:boardSelected={(e) => setCurrentBoardId(e.detail)}
+        />
         <div class="px-6 mt-auto mb-4">
           <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />
         </div>
