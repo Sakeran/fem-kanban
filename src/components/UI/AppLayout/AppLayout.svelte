@@ -35,7 +35,7 @@
 
     <div
       data-sidebar-expanded={$sidebarExpanded}
-      class="app-layout-sidebar hidden sm:block"
+      class="app-layout-sidebar hidden sm:block z-20"
     >
       <Sidebar />
     </div>
