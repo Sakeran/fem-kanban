@@ -37,11 +37,10 @@
   open={!!currentlyViewedTask}
   on:requestClose={() => (currentlyViewedTask = undefined)}
 >
-  <div class="max-w-[30rem] mx-auto p-4 box-content">
+  <div class="w-screen max-w-[30rem] mx-auto p-4 box-content">
     <ViewTaskCard
       on:toggleSubtask={() => console.log("toggle")}
       task={currentlyViewedTask}
-      board={currentlyViewedTask.board}
     />
   </div>
 </Modal>
