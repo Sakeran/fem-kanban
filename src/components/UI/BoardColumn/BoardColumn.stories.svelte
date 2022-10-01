@@ -4,7 +4,7 @@
 
   import { createMockColumn } from "../../../helpers/mocks";
 
-  const column = createMockColumn();
+  const columnData = createMockColumn();
 </script>
 
 <Meta
@@ -17,20 +17,17 @@
 
 <Template let:args>
   <div style={`max-width: 17.5rem;`}>
-    <BoardColumn {...args} on:taskSelected={args.taskSelected} />
+    <BoardColumn {columnData} on:taskSelected={args.taskSelected} />
   </div>
 </Template>
 
-<Story
-  name="Empty"
-  args={{
-    columnData: { ...column, tasks: [] },
-  }}
-/>
+<Story name="Empty" let:args>
+  <div style={`max-width: 17.5rem;`}>
+    <BoardColumn
+      columnData={Object.assign({}, columnData, { tasks: [] })}
+      on:taskSelected={args.taskSelected}
+    />
+  </div>
+</Story>
 
-<Story
-  name="With Tasks"
-  args={{
-    columnData: column,
-  }}
-/>
+<Story name="With Tasks" />
