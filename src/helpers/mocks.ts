@@ -1,6 +1,4 @@
-import Task from "../lib/board/task";
 import Board from "../lib/board/board";
-import BoardColumn from "../lib/board/boardColumn";
 import { mockBoardData } from "./mockBoardData";
 
 export function createMockBoards() {

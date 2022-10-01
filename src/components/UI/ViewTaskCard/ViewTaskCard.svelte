@@ -9,10 +9,8 @@
   import SubtaskCheckbox from "../../Interactive/SubtaskCheckbox/SubtaskCheckbox.svelte";
 
   import type Task from "src/lib/board/task";
-  import type Board from "src/lib/board/board";
 
   export let task: Task;
-  export let board: Board;
 
   let subtasksTotal: number = task.subtasks.length;
   let subtasksFinished: number;
@@ -86,7 +84,7 @@
     </div>
   </fieldset>
   <Select
-    options={board.columns.map((c) => c.name)}
+    options={task.board.columns.map((c) => c.name)}
     label="Current Status"
     value={task.status}
     on:change={handleStatusUpdate}
