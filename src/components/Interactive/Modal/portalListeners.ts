@@ -109,6 +109,12 @@ function handleClick(config: ModalConfig, event: MouseEvent) {
 
   if (config.content.contains(target)) return;
 
+  // If the target is no longer contained by the document, don't trigger a change.
+  // (This can happen if some event handler deletes the target.)
+  if (!document.contains(target)) {
+    return;
+  }
+
   event.preventDefault();
   return requestModalClose(config);
 }

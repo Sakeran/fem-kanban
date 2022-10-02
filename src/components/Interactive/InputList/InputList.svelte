@@ -49,7 +49,7 @@
         />
         <button
           class="text-gray-medium hocus:text-red-normal focus-visible:outline focus-visible:outline-red-normal aspect-square p-3"
-          on:click={() => handleDeletion(idx)}
+          on:click|stopPropagation={() => handleDeletion(idx)}
         >
           <svg
             width="15"
