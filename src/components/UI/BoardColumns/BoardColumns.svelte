@@ -4,11 +4,46 @@
   import { currentBoard } from "../../../stores/boardData";
   import Button from "../../Interactive/Button/Button.svelte";
   import { eventBus } from "../../../lib/eventBus";
+  import { onDestroy, onMount } from "svelte";
 
   function handleTaskSelected(e) {
     eventBus.dispatch("viewTask", e.detail);
   }
+
+  // Track the columns' containing element, as well as the "new column" button,
+  // to ensure that the button is always as tall as the container, and is
+  // always in view.
+  let container: HTMLDivElement;
+  let newColumnButton: HTMLButtonElement;
+
+  onMount(() => {
+    container = newColumnButton.closest(".columns-container")
+      .parentElement as HTMLDivElement;
+
+    container.addEventListener("scroll", computeButtonOffset);
+    computeButtonHeight();
+  });
+
+  onDestroy(() => {
+    container.removeEventListener("scroll", computeButtonOffset);
+  });
+
+  function computeButtonHeight() {
+    // Button should be as tall as the containing element, minus padding.
+    const styles = window.getComputedStyle(container);
+
+    const paddingStyle = styles.getPropertyValue("padding-top");
+    const padding = parseInt(paddingStyle.slice(0, paddingStyle.length - 2));
+
+    newColumnButton.style.height = container.clientHeight - padding * 2 + "px";
+  }
+
+  function computeButtonOffset(e) {
+    newColumnButton.style.marginTop = container.scrollTop + "px";
+  }
 </script>
+
+<svelte:window on:resize={computeButtonHeight} />
 
 <!-- Columns Container -->
 <div
@@ -25,15 +60,14 @@
         </div>
       {/each}
       <!-- Add Columns Button -->
-      <div class="relative basis-[17.5rem] shrink-0">
-        <button
-          class="new-column-button absolute top-0 bottom-0 left-0 w-full rounded-sm grid place-items-center text-gray-medium hocus:text-main-purple-normal"
-          on:click={() => eventBus.dispatch("editBoard", $currentBoard)}
-          ><Heading style="XL" classes="z-10"
-            ><span aria-hidden="true">+</span> New Column</Heading
-          ></button
-        >
-      </div>
+      <button
+        class="new-column-button relative basis-[17.5rem] shrink-0 rounded-sm grid place-items-center text-gray-medium hocus:text-main-purple-normal"
+        bind:this={newColumnButton}
+        on:click={() => eventBus.dispatch("editBoard", $currentBoard)}
+        ><Heading style="XL" classes="z-10"
+          ><span aria-hidden="true">+</span> New Column</Heading
+        ></button
+      >
     {:else}
       <div class="text-gray-medium">
         <Heading element="p" style="L"
