@@ -21,6 +21,7 @@
     | "Destructive"
     | "PrimaryNarrow" = "PrimaryL";
   export let element: "a" | "button" = "button";
+  export let type: "submit" | "button" | "" = "";
   export let href: string = "";
   export let classes: string = "";
 
@@ -32,5 +33,6 @@
   this={element}
   on:click
   href={element !== "a" ? null : href || "#"}
+  type={element !== "button" ? null : type || null}
   class={classList}><slot /></svelte:element
 >
