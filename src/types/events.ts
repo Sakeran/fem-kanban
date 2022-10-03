@@ -1,14 +1,28 @@
 import type Board from "src/lib/board/board";
+import type { TaskData } from "src/lib/board/task";
 import type Task from "src/lib/board/task";
 
 /**
  * Mapping of event names to payloads
  */
 export type EventTypes = {
-  stateTransition: string;
+  // Data Events
   taskUpdated: Task;
   boardUpdated: Board;
+
+  // State Machine Events
+  stateTransition: string;
+
+  // View Task State Events
   viewTask: Task;
+  viewTaskClose: void;
+
+  // Edit Task State Events
+  editTask: void;
+  editTaskCancel: void;
+  editTaskUpdate: TaskData;
+
+  // Add Task State Events
   addNewTask: void;
 };
 

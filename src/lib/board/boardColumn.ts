@@ -29,6 +29,10 @@ export default class BoardColumn {
     this.tasks.push(task);
   }
 
+  removeTask(task: Task) {
+    this.tasks = this.tasks.filter((t) => t !== task);
+  }
+
   serializeToData() {
     return {
       id: this.id,

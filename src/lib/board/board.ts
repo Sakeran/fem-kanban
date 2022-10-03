@@ -61,6 +61,19 @@ export default class Board {
     eventBus.dispatch("boardUpdated", this);
   }
 
+  updateTaskColumn(task: Task, newColumnName: string) {
+    const currentColumn = task.column;
+    const newColumn = this.columns.find((c) => c.name === newColumnName);
+
+    if (!newColumn)
+      throw new Error(
+        `Column name ${newColumnName} does not exist on board ${this.name}`
+      );
+
+    currentColumn.removeTask(task);
+    newColumn.addTask(task);
+  }
+
   serializeToData() {
     return {
       id: this.id,

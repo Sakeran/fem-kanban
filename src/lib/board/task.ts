@@ -126,6 +126,8 @@ export default class Task {
     }
 
     this.data.status = newStatus;
+
+    this.board.updateTaskColumn(this, newStatus);
   }
 
   toggleSubtask(subtaskTitle: string) {
