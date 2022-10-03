@@ -23,7 +23,7 @@
 <Card borderRadius={6} paddingStyle="Modal">
   <Heading element="h2" style="L" classes="text-red-normal">{title}</Heading>
   <Text style="L" classes="mt-6 text-gray-medium">{message}</Text>
-  <div class="mt-6 flex flex-col md:flex-row gap-4">
+  <div class="mt-6 flex flex-col sm:flex-row gap-4">
     <Button
       style="Destructive"
       classes="basis-full"

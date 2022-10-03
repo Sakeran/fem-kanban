@@ -14,7 +14,7 @@
   // Padding Styles
   export const cardPaddingStyles = {
     TodoCard: "py-5.75 px-4",
-    Modal: "p-6 md:p-8"
+    Modal: "p-6 sm:p-8"
   }
 </script>
 
