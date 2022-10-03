@@ -5,6 +5,7 @@ import type Task from "src/lib/board/task";
  * Mapping of event names to payloads
  */
 export type EventTypes = {
+  stateTransition: string;
   taskUpdated: Task;
   boardUpdated: Board;
   viewTask: Task;

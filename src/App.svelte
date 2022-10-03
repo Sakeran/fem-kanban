@@ -3,17 +3,16 @@
   import AppLayout from "./components/UI/AppLayout/AppLayout.svelte";
   import EditTaskCard from "./components/UI/EditTaskCard/EditTaskCard.svelte";
   import ViewTaskCard from "./components/UI/ViewTaskCard/ViewTaskCard.svelte";
-  import { mockBoardData } from "./helpers/mockBoardData";
-  import Board from "./lib/board/board";
   import type Task from "./lib/board/task";
   import { eventBus } from "./lib/eventBus";
+  import { stateMachine } from "./lib/stateMachine/stateMachine";
 
   import { colorScheme } from "./stores/appControls";
-  import {
-    currentBoard,
-    loadBoards,
-    updateCurrentBoard,
-  } from "./stores/boardData";
+  import { currentState } from "./stores/appState";
+  import { currentBoard, updateCurrentBoard } from "./stores/boardData";
+
+  // Setup state machine.
+  stateMachine.start("loading");
 
   // Handle changes to color scheme state
   $: {
@@ -23,9 +22,6 @@
       document.body.classList.remove("dark");
     }
   }
-
-  // TEMP: Setup board data
-  loadBoards(mockBoardData.map((data) => new Board(data)));
 
   // View Task Modal
   let currentlyViewedTask: Task;
