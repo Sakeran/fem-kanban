@@ -12,7 +12,7 @@
   <div class="w-screen max-w-[30rem] mx-auto p-4 box-content">
     <ViewTaskCard
       on:editTask={() => eventBus.dispatch("editTask")}
-      on:deleteTask={() => console.log("TODO")}
+      on:deleteTask={() => eventBus.dispatch("deleteTask")}
       on:toggleSubtask={({ detail: { task, subtaskTitle } }) => {
         console.log("todo");
       }}

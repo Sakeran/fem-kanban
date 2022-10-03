@@ -3,6 +3,7 @@ import type { BoardColumnData } from "./boardColumn";
 import BoardColumn from "./boardColumn";
 import Task from "./task";
 import type { Subtask } from "./task";
+import type DeleteTaskModal from "src/modals/DeleteTaskModal.svelte";
 
 export type BoardData = {
   id: string;
@@ -72,6 +73,10 @@ export default class Board {
 
     currentColumn.removeTask(task);
     newColumn.addTask(task);
+  }
+
+  deleteTask(task: Task) {
+    task.column.removeTask(task);
   }
 
   serializeToData() {

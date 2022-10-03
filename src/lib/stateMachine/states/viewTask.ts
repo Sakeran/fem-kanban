@@ -17,6 +17,10 @@ export const ViewTaskState: StateMachineState = {
     this.editUnsub = eventBus.subscribe("editTask", () => {
       stateMachine.transition("editTask", this.currentTask);
     });
+
+    this.deleteUnsub = eventBus.subscribe("deleteTask", () => {
+      stateMachine.transition("deleteTask", this.currentTask);
+    });
   },
 
   onExit() {
@@ -25,5 +29,6 @@ export const ViewTaskState: StateMachineState = {
 
     this.closeUnsub();
     this.editUnsub();
+    this.deleteUnsub();
   },
 };

@@ -1,17 +1,11 @@
 <script lang="ts">
-  import Modal from "./components/Interactive/Modal/Modal.svelte";
   import AppLayout from "./components/UI/AppLayout/AppLayout.svelte";
-  import EditTaskCard from "./components/UI/EditTaskCard/EditTaskCard.svelte";
-  import ViewTaskCard from "./components/UI/ViewTaskCard/ViewTaskCard.svelte";
-  import type Task from "./lib/board/task";
-  import { eventBus } from "./lib/eventBus";
   import { stateMachine } from "./lib/stateMachine/stateMachine";
+  import DeleteTaskModal from "./modals/DeleteTaskModal.svelte";
   import EditTaskModal from "./modals/EditTaskModal.svelte";
   import ViewTaskModal from "./modals/ViewTaskModal.svelte";
 
   import { colorScheme } from "./stores/appControls";
-  import { currentState } from "./stores/appState";
-  import { currentBoard, updateCurrentBoard } from "./stores/boardData";
 
   // Setup state machine.
   stateMachine.start("loading");
@@ -35,3 +29,6 @@
 
 <!-- Edit Task Modal -->
 <EditTaskModal />
+
+ <!-- Delete Task Modal  -->
+ <DeleteTaskModal />

@@ -22,6 +22,11 @@ export type EventTypes = {
   editTaskCancel: void;
   editTaskUpdate: TaskData;
 
+  // Delete Task Events
+  deleteTask: Task;
+  deleteTaskCancel: void;
+  deleteTaskConfirm: void;
+
   // Add Task State Events
   addNewTask: void;
 };

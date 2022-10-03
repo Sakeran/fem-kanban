@@ -11,5 +11,7 @@ eventBus.subscribe("stateTransition", (newState) => currentState.set(newState));
 export const currentlyViewedTask = writable<Task>(undefined);
 
 // Currently Edited Task
-
 export const currentlyEditedTask = writable<Task>(undefined);
+
+// Task to Delete
+export const taskToDelete = writable<Task>(undefined);
