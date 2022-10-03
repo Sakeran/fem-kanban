@@ -60,7 +60,7 @@ export class StateMachine {
       throw new Error(`Tried to transition into unknown state "${stateName}"`);
 
     const currentState = this.states.get(this.activeState);
-    const newState = this.states.get(stateName);
+    const newState = this.states.get(stateName) as StateMachineState;
 
     currentState && currentState.onExit && currentState.onExit();
 
