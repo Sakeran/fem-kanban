@@ -53,7 +53,9 @@
         >You haven't yet created any boards. Create a new board to get started.</Heading
       >
 
-      <Button style="PrimaryNarrow" on:click={() => console.log("TODO")}
+      <Button
+        style="PrimaryNarrow"
+        on:click={() => eventBus.dispatch("addNewBoard")}
         ><span><span aria-hidden="true">+ </span>Add New Board</span></Button
       >
     </div>

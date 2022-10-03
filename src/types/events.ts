@@ -42,6 +42,11 @@ export type EventTypes = {
   deleteBoard: Board,
   deleteBoardCancel: void;
   deleteBoardConfirm: void;
+
+  // Add Board Events
+  addNewBoard: void;
+  addNewBoardCancel: void;
+  addNewBoardCreate: BoardDataUpdate;
 };
 
 export type Events = keyof EventTypes;

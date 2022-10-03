@@ -2,7 +2,8 @@
  * Stores for board data
  */
 
-import type Board from "src/lib/board/board";
+import type { BoardDataUpdate } from "src/lib/board/board";
+import Board from "../lib/board/board";
 import { derived, get, writable } from "svelte/store";
 
 // All Boards
@@ -11,6 +12,15 @@ export const boards = writable([] as Board[]);
 
 export function loadBoards(boardData: Board[]) {
   boards.set(boardData);
+}
+
+export function addBoard(boardData: BoardDataUpdate) {
+  const newBoard = Board.createFromUpdate(boardData);
+
+  const newBoards = [...get(boards), newBoard];
+  boards.set(newBoards);
+
+  return newBoard;
 }
 
 export function deleteBoard(board: Board) {

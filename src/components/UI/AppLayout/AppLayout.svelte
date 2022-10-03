@@ -8,6 +8,7 @@
   import {
     boards,
     currentBoard,
+    currentBoardId,
     setCurrentBoardId,
   } from "../../../stores/boardData";
   import { eventBus } from "../../../lib/eventBus";
@@ -36,7 +37,9 @@
       >
         <BoardTabList
           boards={$boards}
+          selectedBoardId={$currentBoardId}
           on:boardSelected={(e) => setCurrentBoardId(e.detail)}
+          on:createNewBoard={() => eventBus.dispatch("addNewBoard")}
         />
         <div class="px-6 mt-auto mb-4">
           <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />

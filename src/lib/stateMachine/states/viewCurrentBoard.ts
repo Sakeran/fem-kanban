@@ -24,6 +24,10 @@ export const ViewCurrentBoardState: StateMachineState = {
     this.deleteBoardUnsub = eventBus.subscribe("deleteBoard", (board) => {
       stateMachine.transition("deleteBoard", board);
     });
+
+    this.addBoardUnsub = eventBus.subscribe("addNewBoard", (board) => {
+      stateMachine.transition("addNewBoard", board);
+    });
   },
 
   onExit() {
@@ -31,5 +35,6 @@ export const ViewCurrentBoardState: StateMachineState = {
     this.addTaskUnsub();
     this.editBoardUnsub();
     this.deleteBoardUnsub();
+    this.addBoardUnsub();
   },
 };

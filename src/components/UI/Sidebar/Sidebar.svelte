@@ -4,7 +4,12 @@
   import BoardTabList from "../../Interactive/BoardTabList/BoardTabList.svelte";
 
   import { colorScheme, sidebarExpanded } from "../../../stores/appControls";
-  import { boards, setCurrentBoardId } from "../../../stores/boardData";
+  import {
+    boards,
+    currentBoardId,
+    setCurrentBoardId,
+  } from "../../../stores/boardData";
+  import { eventBus } from "../../../lib/eventBus";
 
   export let forceExpanded: boolean = false;
 
@@ -29,7 +34,9 @@
 
   <BoardTabList
     boards={$boards}
+    selectedBoardId={$currentBoardId}
     on:boardSelected={(e) => setCurrentBoardId(e.detail)}
+    on:createNewBoard={() => eventBus.dispatch("addNewBoard")}
   />
   <div class="px-6 mt-auto mb-4">
     <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />

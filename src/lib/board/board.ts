@@ -22,6 +22,21 @@ export default class Board {
 
   public columns: BoardColumn[];
 
+  static createFromUpdate(updateData: BoardDataUpdate) {
+    // TODO - Better implementation. Probably requires a complete
+    // refactor of the data layer.
+    return new Board({
+      id: Math.random().toString(36).slice(2),
+      name: updateData.name,
+      columns: updateData.columns.map((name) => ({
+        id: "...'",
+        name,
+        boardColor: "red",
+        tasks: [],
+      })),
+    });
+  }
+
   constructor(boardData: BoardData) {
     this.id = boardData.id;
     this.name = boardData.name;
