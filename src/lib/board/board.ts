@@ -3,7 +3,7 @@ import type { BoardColumnData } from "./boardColumn";
 import BoardColumn from "./boardColumn";
 import Task from "./task";
 import type { Subtask } from "./task";
-import type DeleteTaskModal from "src/modals/DeleteTaskModal.svelte";
+import type { TaskCreateData } from "./task";
 
 export type BoardData = {
   id: string;
@@ -36,7 +36,7 @@ export default class Board {
       return;
     }
 
-    const column = this.columns.find((c) => c.name === status);
+    const column = this.getColumn(status);
 
     if (!column) {
       console.warn(
@@ -64,7 +64,7 @@ export default class Board {
 
   updateTaskColumn(task: Task, newColumnName: string) {
     const currentColumn = task.column;
-    const newColumn = this.columns.find((c) => c.name === newColumnName);
+    const newColumn = this.getColumn(newColumnName);
 
     if (!newColumn)
       throw new Error(
@@ -77,6 +77,28 @@ export default class Board {
 
   deleteTask(task: Task) {
     task.column.removeTask(task);
+  }
+
+  createNewTask(taskData: TaskCreateData) {
+    const column = this.getColumn(taskData.status);
+    if (!column)
+      throw new Error(
+        `Tried to create new task with unknown column "${taskData.status}"`
+      );
+
+    const id = Math.random().toString(36).slice(2);
+
+    const subtasks = taskData.subtasks.map((st) => ({
+      title: st,
+      isCompleted: false,
+    }));
+
+    const newTask = new Task({ ...taskData, id, subtasks }, column, this);
+    column.addTask(newTask);
+  }
+
+  getColumn(columnName: string) {
+    return this.columns.find((c) => c.name === columnName);
   }
 
   serializeToData() {

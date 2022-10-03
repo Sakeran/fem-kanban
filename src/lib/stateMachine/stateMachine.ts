@@ -1,4 +1,5 @@
 import { eventBus } from "../eventBus";
+import { AddNewTaskState } from "./states/addNewTask";
 import { DeleteTaskState } from "./states/deleteTask";
 import { EditTaskState } from "./states/editTask";
 import { LoadingState } from "./states/loading";
@@ -74,5 +75,6 @@ singleton.addState(ViewCurrentBoardState);
 singleton.addState(ViewTaskState);
 singleton.addState(EditTaskState);
 singleton.addState(DeleteTaskState);
+singleton.addState(AddNewTaskState);
 
 export const stateMachine = singleton;

@@ -1,5 +1,5 @@
 import type Board from "src/lib/board/board";
-import type { TaskData } from "src/lib/board/task";
+import type { TaskCreateData, TaskData } from "src/lib/board/task";
 import type Task from "src/lib/board/task";
 
 /**
@@ -29,6 +29,8 @@ export type EventTypes = {
 
   // Add Task State Events
   addNewTask: void;
+  addNewTaskCreate: TaskCreateData;
+  addNewTaskCancel: void;
 };
 
 export type Events = keyof EventTypes;

@@ -12,6 +12,13 @@ export type TaskData = {
   subtasks: Subtask[];
 };
 
+export type TaskCreateData = {
+  title: string;
+  description: string;
+  status: string;
+  subtasks: string[];
+};
+
 export default class Task {
   private data: TaskData;
 

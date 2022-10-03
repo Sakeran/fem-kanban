@@ -1,6 +1,7 @@
 <script lang="ts">
   import AppLayout from "./components/UI/AppLayout/AppLayout.svelte";
   import { stateMachine } from "./lib/stateMachine/stateMachine";
+  import AddTaskModal from "./modals/AddTaskModal.svelte";
   import DeleteTaskModal from "./modals/DeleteTaskModal.svelte";
   import EditTaskModal from "./modals/EditTaskModal.svelte";
   import ViewTaskModal from "./modals/ViewTaskModal.svelte";
@@ -32,3 +33,6 @@
 
  <!-- Delete Task Modal  -->
  <DeleteTaskModal />
+
+<!-- Add New Task Modal -->
+<AddTaskModal />

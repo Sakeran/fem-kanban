@@ -12,9 +12,14 @@ export const ViewCurrentBoardState: StateMachineState = {
     this.onViewTaskUnsub = eventBus.subscribe("viewTask", (task) => {
       stateMachine.transition("viewTask", task);
     });
+
+    this.addTaskUnsub = eventBus.subscribe("addNewTask", () => {
+      stateMachine.transition("addNewTask");
+    });
   },
 
   onExit() {
     this.onViewTaskUnsub();
+    this.addTaskUnsub();
   },
 };
