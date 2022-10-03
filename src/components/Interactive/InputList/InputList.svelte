@@ -48,8 +48,9 @@
           bind:value={item}
         />
         <button
+          type="button"
           class="text-gray-medium hocus:text-red-normal focus-visible:outline focus-visible:outline-red-normal aspect-square p-3"
-          on:click|stopPropagation={() => handleDeletion(idx)}
+          on:click={() => handleDeletion(idx)}
         >
           <svg
             width="15"
@@ -82,7 +83,11 @@
       </div>
     {/each}
   </div>
-  <Button style="Secondary" classes="block w-full mt-3" on:click={handleAddItem}
+  <Button
+    style="Secondary"
+    type="button"
+    classes="block w-full mt-3"
+    on:click={handleAddItem}
     ><span><span aria-hidden="true">+ </span>{buttonText}</span></Button
   >
 </div>

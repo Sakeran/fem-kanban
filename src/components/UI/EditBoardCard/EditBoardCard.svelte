@@ -14,7 +14,8 @@
 
   const dispatch = createEventDispatcher();
 
-  function handleCreateBoard() {
+  function handleCreateBoard(e) {
+    e.preventDefault();
     if (!formIsValid()) return;
     dispatch("submitBoard", { name, columns });
   }
@@ -41,20 +42,22 @@
 </script>
 
 <Card borderRadius={6} paddingStyle="Modal">
-  <Heading element="h2" classes="text-black dark:text-white">{title}</Heading>
-  <TextInput
-    bind:value={name}
-    label="Board Name"
-    required={true}
-    classes="my-6"
-  />
-  <InputList
-    label="Board Columns"
-    buttonText="Add New Column"
-    itemName="column"
-    bind:items={columns}
-  />
-  <Button style="PrimaryS" classes="w-full mt-6" on:click={handleCreateBoard}
-    >{submitButtonText}</Button
-  >
+  <form on:submit={handleCreateBoard}>
+    <Heading element="h2" classes="text-black dark:text-white">{title}</Heading>
+    <TextInput
+      bind:value={name}
+      label="Board Name"
+      required={true}
+      classes="my-6"
+    />
+    <InputList
+      label="Board Columns"
+      buttonText="Add New Column"
+      itemName="column"
+      bind:items={columns}
+    />
+    <Button style="PrimaryS" classes="w-full mt-6" on:click={handleCreateBoard}
+      >{submitButtonText}</Button
+    >
+  </form>
 </Card>
