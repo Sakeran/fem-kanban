@@ -74,7 +74,9 @@
           >This board is empty. Create a new column to get started.</Heading
         >
 
-        <Button style="PrimaryNarrow" on:click={() => console.log("TODO")}
+        <Button
+          style="PrimaryNarrow"
+          on:click={() => eventBus.dispatch("editBoard", $currentBoard)}
           ><span><span aria-hidden="true">+ </span>Add New Column</span></Button
         >
       </div>
