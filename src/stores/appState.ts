@@ -19,3 +19,6 @@ export const taskToDelete = writable<Task>(undefined);
 
 // Currently Edited Board
 export const currentlyEditedBoard = writable<Board>(undefined);
+
+// Board to Delete
+export const boardToDelete = writable<Board>(undefined);

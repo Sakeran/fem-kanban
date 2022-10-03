@@ -3,7 +3,7 @@
  */
 
 import type Board from "src/lib/board/board";
-import { derived, writable } from "svelte/store";
+import { derived, get, writable } from "svelte/store";
 
 // All Boards
 
@@ -11,6 +11,20 @@ export const boards = writable([] as Board[]);
 
 export function loadBoards(boardData: Board[]) {
   boards.set(boardData);
+}
+
+export function deleteBoard(board: Board) {
+  const allBoards = get(boards);
+
+  const isCurrentBoard = get(currentBoardId) === board.id;
+
+  const newBoards = allBoards.filter((b) => b !== board);
+
+  if (isCurrentBoard) {
+    setCurrentBoardId(newBoards.length > 0 ? newBoards[0].id : undefined);
+  }
+
+  boards.set(newBoards);
 }
 
 // Current Board

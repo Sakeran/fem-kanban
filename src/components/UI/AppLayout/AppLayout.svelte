@@ -21,6 +21,7 @@
       on:toggleBoardsMenu={() => (mobileMenuVisible = !mobileMenuVisible)}
       on:addNewTask={() => eventBus.dispatch("addNewTask")}
       on:editBoard={() => eventBus.dispatch("editBoard", $currentBoard)}
+      on:deleteBoard={() => eventBus.dispatch("deleteBoard", $currentBoard)}
     />
   </div>
   <main class="app-layout-content">

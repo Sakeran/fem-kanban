@@ -2,6 +2,7 @@
   import AppLayout from "./components/UI/AppLayout/AppLayout.svelte";
   import { stateMachine } from "./lib/stateMachine/stateMachine";
   import AddTaskModal from "./modals/AddTaskModal.svelte";
+  import DeleteBoardModal from "./modals/DeleteBoardModal.svelte";
   import DeleteTaskModal from "./modals/DeleteTaskModal.svelte";
   import EditBoardModal from "./modals/EditBoardModal.svelte";
   import EditTaskModal from "./modals/EditTaskModal.svelte";
@@ -40,3 +41,6 @@
 
 <!-- Edit Board Modal -->
 <EditBoardModal />
+
+<!-- Delete Board Modal -->
+<DeleteBoardModal />
