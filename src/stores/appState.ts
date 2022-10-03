@@ -1,6 +1,7 @@
 import { eventBus } from "../lib/eventBus";
 import { writable } from "svelte/store";
 import type Task from "../lib/board/task";
+import type Board from "src/lib/board/board";
 
 // Current State Store
 export const currentState = writable<string>(undefined);
@@ -15,3 +16,6 @@ export const currentlyEditedTask = writable<Task>(undefined);
 
 // Task to Delete
 export const taskToDelete = writable<Task>(undefined);
+
+// Currently Edited Board
+export const currentlyEditedBoard = writable<Board>(undefined);

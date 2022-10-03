@@ -5,7 +5,11 @@
   import BoardColumns from "../BoardColumns/BoardColumns.svelte";
   import Header from "../Header/Header.svelte";
   import Sidebar from "../Sidebar/Sidebar.svelte";
-  import { boards, setCurrentBoardId } from "../../../stores/boardData";
+  import {
+    boards,
+    currentBoard,
+    setCurrentBoardId,
+  } from "../../../stores/boardData";
   import { eventBus } from "../../../lib/eventBus";
 
   let mobileMenuVisible: boolean = false;
@@ -16,6 +20,7 @@
     <Header
       on:toggleBoardsMenu={() => (mobileMenuVisible = !mobileMenuVisible)}
       on:addNewTask={() => eventBus.dispatch("addNewTask")}
+      on:editBoard={() => eventBus.dispatch("editBoard", $currentBoard)}
     />
   </div>
   <main class="app-layout-content">

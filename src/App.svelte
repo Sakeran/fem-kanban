@@ -3,6 +3,7 @@
   import { stateMachine } from "./lib/stateMachine/stateMachine";
   import AddTaskModal from "./modals/AddTaskModal.svelte";
   import DeleteTaskModal from "./modals/DeleteTaskModal.svelte";
+  import EditBoardModal from "./modals/EditBoardModal.svelte";
   import EditTaskModal from "./modals/EditTaskModal.svelte";
   import ViewTaskModal from "./modals/ViewTaskModal.svelte";
 
@@ -36,3 +37,6 @@
 
 <!-- Add New Task Modal -->
 <AddTaskModal />
+
+<!-- Edit Board Modal -->
+<EditBoardModal />

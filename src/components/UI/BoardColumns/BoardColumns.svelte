@@ -28,6 +28,7 @@
       <div class="relative basis-[17.5rem] shrink-0">
         <button
           class="new-column-button absolute top-0 bottom-0 left-0 w-full rounded-sm grid place-items-center text-gray-medium hocus:text-main-purple-normal"
+          on:click={() => eventBus.dispatch("editBoard", $currentBoard)}
           ><Heading style="XL" classes="z-10"
             ><span aria-hidden="true">+</span> New Column</Heading
           ></button

@@ -11,9 +11,14 @@ export type BoardData = {
   columns: BoardColumnData[];
 };
 
+export type BoardDataUpdate = {
+  name: string;
+  columns: string[];
+};
+
 export default class Board {
   readonly id;
-  readonly name;
+  public name;
 
   public columns: BoardColumn[];
 
@@ -26,6 +31,46 @@ export default class Board {
 
   get columnNames() {
     return this.columns.map((c) => c.name);
+  }
+
+  update(updateData: BoardDataUpdate) {
+    const { name, columns } = updateData;
+
+    if (name) {
+      this.updateName(name);
+    }
+
+    if (columns) {
+      this.updateColumns(columns);
+    }
+  }
+
+  updateName(newName: string) {
+    if (newName !== this.name) {
+      this.name = newName;
+    }
+  }
+
+  updateColumns(columns: string[]) {
+    // TODO - Placeholder; this isn't the correct behavior
+    // (modified column names are deleted, but should be updated positionally)
+
+    const newColumns = columns.map((columnName) => {
+      const existing = this.getColumn(columnName);
+      if (existing) return existing;
+
+      return new BoardColumn(
+        {
+          id: Math.random().toString(36).slice(2),
+          name: columnName,
+          boardColor: "#f00",
+          tasks: [],
+        },
+        this
+      );
+    });
+
+    this.columns = newColumns;
   }
 
   addNewTask({ title, description, subtasks, status }) {
