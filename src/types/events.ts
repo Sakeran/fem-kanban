@@ -17,6 +17,8 @@ export type EventTypes = {
   // View Task State Events
   viewTask: Task;
   viewTaskClose: void;
+  viewTaskToggleSubtask: string;
+  viewTaskUpdateStatus: string;
 
   // Edit Task State Events
   editTask: void;

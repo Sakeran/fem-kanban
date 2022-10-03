@@ -2,6 +2,7 @@ import { currentlyViewedTask } from "../../../stores/appState";
 import { eventBus } from "../../../lib/eventBus";
 import type { StateMachineState } from "../types";
 import { stateMachine } from "../stateMachine";
+import { updateCurrentBoard } from "../../../stores/boardData";
 
 export const ViewTaskState: StateMachineState = {
   name: "viewTask",
@@ -21,6 +22,28 @@ export const ViewTaskState: StateMachineState = {
     this.deleteUnsub = eventBus.subscribe("deleteTask", () => {
       stateMachine.transition("deleteTask", this.currentTask);
     });
+
+    this.toggleUnsub = eventBus.subscribe(
+      "viewTaskToggleSubtask",
+      (subtaskTitle) => {
+        this.currentTask.toggleSubtask(subtaskTitle);
+
+        // Because we can see the current board while viewing the modal, force
+        // the board view to update immediately.
+        updateCurrentBoard();
+      }
+    );
+
+    this.updateStatusUnsut = eventBus.subscribe(
+      "viewTaskUpdateStatus",
+      (columnName) => {
+        this.currentTask.board.updateTaskColumn(this.currentTask, columnName);
+
+        // Because we can see the current board while viewing the modal, force
+        // the board view to update immediately.
+        updateCurrentBoard();
+      }
+    );
   },
 
   onExit() {
@@ -30,5 +53,6 @@ export const ViewTaskState: StateMachineState = {
     this.closeUnsub();
     this.editUnsub();
     this.deleteUnsub();
+    this.toggleUnsub();
   },
 };

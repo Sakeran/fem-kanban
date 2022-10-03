@@ -13,11 +13,11 @@
     <ViewTaskCard
       on:editTask={() => eventBus.dispatch("editTask")}
       on:deleteTask={() => eventBus.dispatch("deleteTask")}
-      on:toggleSubtask={({ detail: { task, subtaskTitle } }) => {
-        console.log("todo");
+      on:toggleSubtask={({ detail: { subtaskTitle } }) => {
+        eventBus.dispatch("viewTaskToggleSubtask", subtaskTitle);
       }}
-      on:updateStatus={({ detail: { task, status } }) => {
-        console.log("todo");
+      on:updateStatus={({ detail: { status } }) => {
+        eventBus.dispatch("viewTaskUpdateStatus", status);
       }}
       task={$currentlyViewedTask}
     />
