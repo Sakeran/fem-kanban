@@ -64,7 +64,6 @@
     // Get Inputs
     const titleInput = canvas.getByLabelText("Title");
     const descInput = canvas.getByLabelText("Description");
-    const firstSubtaskInput = canvas.getByLabelText("blank subtask");
     const addNewSubtaskButton = canvas.getByText("Add New Subtask");
     const statusSelect = canvas.getByLabelText("Status");
     const createTaskButton = canvas.getByText("Create Task");
@@ -83,6 +82,8 @@
     await userEvent.type(descInput, "Some task description");
 
     // Input first subtask name
+    await userEvent.click(addNewSubtaskButton);
+    const firstSubtaskInput = canvas.getByLabelText("blank subtask");
     await userEvent.type(firstSubtaskInput, "Subtask 1");
 
     // Clear name input -- should not submit

@@ -46,7 +46,6 @@
 
     // Get Inputs
     const nameInput = canvas.getByLabelText("Board Name");
-    const firstColumnInput = canvas.getByLabelText("blank column");
     const addNewColumnButton = canvas.getByText("Add New Column");
     const createBoardButton = canvas.getByText("Create New Board");
 
@@ -61,6 +60,8 @@
     expect(createBoardFn).not.toHaveBeenCalled();
 
     // Input first column name
+    await userEvent.click(addNewColumnButton);
+    const firstColumnInput = canvas.getByLabelText("blank column");
     await userEvent.type(firstColumnInput, "Todo");
 
     // Clear name input -- should not submit
@@ -93,9 +94,7 @@
     expect(createBoardFn).toHaveBeenCalledTimes(1);
     const { detail: newBoardData } = createBoardFn.mock.lastCall[0];
 
-    expect(newBoardData).toStrictEqual({
-      name: "Test Board Name",
-      columns: ["Todo", "Doing", "Done"],
-    });
+    expect(newBoardData.name).toBe("Test Board Name");
+    expect(newBoardData.columns).toStrictEqual(["Todo", "Doing", "Done"]);
   }}
 />
