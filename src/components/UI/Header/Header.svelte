@@ -60,6 +60,7 @@
     <div class="sm:hidden">
       <IconButton
         textAlternative="Add New Task"
+        disabled={$currentBoard.columns.length == 0}
         on:click={() => dispatch("addNewTask")}
         ><svg
           width="12"
@@ -77,7 +78,10 @@
     </div>
     <!-- (Tablet/Desktop Only) Add Task Button  -->
     <div class="hidden sm:block">
-      <Button style="PrimaryNarrow" on:click={() => dispatch("addNewTask")}
+      <Button
+        style="PrimaryNarrow"
+        on:click={() => dispatch("addNewTask")}
+        disabled={$currentBoard.columns.length == 0}
         ><span><span aria-hidden="true">+ </span>Add New Task</span></Button
       >
     </div>
