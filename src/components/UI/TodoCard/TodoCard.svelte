@@ -14,9 +14,13 @@
   classes="relative text-black dark:text-white hover:text-main-purple-normal focus-within:text-main-purple-normal dark:hover:text-main-purple-normal dark:focus-within:text-main-purple-normal"
 >
   <Heading element={"h4"} style="M">{title}</Heading>
-  <Text style="M" classes="mt-2 text-gray-medium"
-    >{subtasksCompleted} of {subtaskTotal} complete</Text
-  >
+  <Text style="M" classes="mt-2 text-gray-medium">
+    {#if subtaskTotal > 0}
+      {subtasksCompleted} of {subtaskTotal} complete
+    {:else}
+      No subtasks
+    {/if}
+  </Text>
   <button
     on:click
     class="block w-full absolute inset-0 rounded-lg outline-2 focus-visible:outline outline-offset-4 focus-visible:outline-main-purple-hover motion-safe:transition-colors motion-safe:ease-in-out"

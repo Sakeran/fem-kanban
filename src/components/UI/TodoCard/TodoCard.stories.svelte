@@ -30,3 +30,12 @@
     subtasksCompleted: 0,
   }}
 />
+
+<Story
+  name="No Subtasks"
+  args={{
+    title: "Build UI for onboarding flow",
+    subtaskTotal: 0,
+    subtasksCompleted: 0,
+  }}
+/>
