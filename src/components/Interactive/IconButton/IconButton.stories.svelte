@@ -9,6 +9,7 @@
   component={IconButton}
   argTypes={{
     textAlternative: { control: "text" },
+    disabled: { control: "boolean" },
   }}
   parameters={{ actions: { handles: ["click"] } }}
 />
@@ -41,4 +42,9 @@
     const button = canvas.getByText("Add New Task");
     await userEvent.click(button);
   }}
+/>
+
+<Story
+  name="Disabled"
+  args={{ textAlternative: "Add New Task", disabled: true }}
 />

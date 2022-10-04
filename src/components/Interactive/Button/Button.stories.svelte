@@ -13,6 +13,7 @@
       control: "select",
       options: ["PrimaryL", "PrimaryS", "Secondary", "Destructive"],
     },
+    disabled: {control: "boolean"},
     classes: { control: "text" },
   }}
   parameters={{ actions: { handles: ["click"] } }}
@@ -61,4 +62,9 @@
     style: "PrimaryL",
     classes: "w-full",
   }}
+/>
+
+<Story
+  name="Disabled"
+  args={{ content: "Button (disabled)", style: "PrimaryL", disabled: true }}
 />
