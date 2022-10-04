@@ -12,6 +12,7 @@
 </script>
 
 <script lang="ts">
+  import Text from "../../Typography/Text/Text.svelte";
   import { createEventDispatcher, tick } from "svelte";
   import Button from "../Button/Button.svelte";
   import TextInput from "../TextInput/TextInput.svelte";
@@ -22,8 +23,6 @@
   export let buttonText: string = "Add New Subtask";
   export let itemName: string = "subtask";
   export let items: string[] = [];
-
-  if (items.length === 0) items.push("");
 
   // Keep track of the actions performed on this input.
   // This is necessary to determine which columns are renamed, deleted, etc
@@ -51,8 +50,6 @@
   function handleDeletion(itemIdx: number) {
     // Don't delete non-existent entries
     if (itemIdx >= items.length) return;
-    // Always show at least one item box
-    if (items.length === 1) return;
 
     items.splice(itemIdx, 1);
     items = items;
@@ -80,6 +77,11 @@
 <div class={classes || null}>
   <h3 class="text-12p font-bold text-gray-medium dark:text-white">{label}</h3>
   <div class="mt-2 flex flex-col gap-3">
+    {#if items.length === 0}
+      <div class="text-gray-medium text-center">
+        <Text>You haven't added any {itemName}s yet.</Text>
+      </div>
+    {/if}
     {#each items as item, idx}
       <div class="flex gap-1" bind:this={inputContainer}>
         <TextInput
