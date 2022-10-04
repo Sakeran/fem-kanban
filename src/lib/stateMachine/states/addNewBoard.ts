@@ -12,7 +12,7 @@ export const AddNewBoardState: StateMachineState = {
     });
 
     this.createUnsub = eventBus.subscribe("addNewBoardCreate", (boardData) => {
-      const newBoard = addBoard(boardData);
+      const newBoard = addBoard(boardData.name, boardData.columns);
       setCurrentBoardId(newBoard.id);
 
       stateMachine.transition("viewCurrentBoard");

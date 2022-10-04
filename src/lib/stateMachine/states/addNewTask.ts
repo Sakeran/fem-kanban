@@ -3,6 +3,7 @@ import type { StateMachineState } from "../types";
 import { stateMachine } from "../stateMachine";
 import { currentBoard } from "../../../stores/boardData";
 import { get } from "svelte/store";
+import { Task } from "../../../lib/board/task";
 
 export const AddNewTaskState: StateMachineState = {
   name: "addNewTask",
@@ -13,7 +14,13 @@ export const AddNewTaskState: StateMachineState = {
     });
 
     this.createUnsub = eventBus.subscribe("addNewTaskCreate", (taskData) => {
-      get(currentBoard).createNewTask(taskData);
+      const task = Task.createNewTask(
+        taskData.title,
+        taskData.description,
+        taskData.subtasks
+      );
+
+      get(currentBoard).setTaskColumn(task, taskData.status);
 
       stateMachine.transition("viewCurrentBoard");
     });

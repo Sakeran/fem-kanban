@@ -8,7 +8,7 @@
   import Text from "../../Typography/Text/Text.svelte";
   import SubtaskCheckbox from "../../Interactive/SubtaskCheckbox/SubtaskCheckbox.svelte";
 
-  import type Task from "src/lib/board/task";
+  import type { Task } from "../../../lib/board/task";
 
   export let task: Task;
 

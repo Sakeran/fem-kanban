@@ -37,7 +37,7 @@ export const ViewTaskState: StateMachineState = {
     this.updateStatusUnsut = eventBus.subscribe(
       "viewTaskUpdateStatus",
       (columnName) => {
-        this.currentTask.board.updateTaskColumn(this.currentTask, columnName);
+        this.currentTask.updateColumn(columnName);
 
         // Because we can see the current board while viewing the modal, force
         // the board view to update immediately.

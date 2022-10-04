@@ -1,6 +1,7 @@
-import type Board from "./board";
+import generateId from "../../helpers/generateId";
+import type { Board } from "./board";
 import type { TaskData } from "./task";
-import Task from "./task";
+import { Task } from "./task";
 
 export type BoardColumnData = {
   id: string;
@@ -9,36 +10,80 @@ export type BoardColumnData = {
   tasks: TaskData[];
 };
 
-export default class BoardColumn {
-  readonly id;
-  readonly name;
-  readonly boardColor;
+export class BoardColumn {
+  public id: string;
+  public name: string;
+  public boardColor: string;
+  public tasks: Task[];
 
-  public tasks;
+  private _board: Board | undefined;
 
-  constructor(columnData, readonly board: Board) {
-    this.id = columnData.id;
-    this.name = columnData.name;
-    this.boardColor = columnData.boardColor;
+  get board() {
+    if (!this._board) throw new Error("Column has no board set");
 
-    this.tasks = columnData.tasks.map((td) => new Task(td, this, board));
+    return this._board;
   }
 
-  addTask(task: Task) {
-    task.status = this.name;
-    this.tasks.push(task);
+  static createNewColumn(name, boardColor) {
+    const column = new BoardColumn();
+
+    column.id = generateId();
+    column.name = name;
+    column.boardColor = boardColor;
+    column.tasks = [];
+
+    return column;
   }
 
-  removeTask(task: Task) {
-    this.tasks = this.tasks.filter((t) => t !== task);
+  static loadFromData(data: BoardColumnData) {
+    const column = new BoardColumn();
+
+    column.id = data.id;
+    column.name = data.name;
+    column.boardColor = data.boardColor;
+    column.tasks = data.tasks.map((td) => {
+      const task = Task.loadFromData(td);
+      task.setColumn(column);
+      return task;
+    });
+
+    return column;
   }
 
-  serializeToData() {
+  serializeToData(): BoardColumnData {
     return {
       id: this.id,
       name: this.name,
       boardColor: this.boardColor,
       tasks: this.tasks.map((t) => t.serializeToData()),
     };
+  }
+
+  setBoard(board: Board) {
+    this._board = board;
+  }
+
+  addTask(task: Task) {
+    if (this.tasks.includes(task)) {
+      console.warn(
+        `Task "${task.title}" is already included in column "${this.name}"`
+      );
+      return;
+    }
+
+    task.setColumn(this);
+    this.tasks.push(task);
+  }
+
+  removeTask(task: Task) {
+    if (!this.tasks.includes(task)) {
+      console.warn(
+        `Task to remove "${task.title}" is not included in column "${this.name}"`
+      );
+      return;
+    }
+
+    task.unsetColumn();
+    this.tasks = this.tasks.filter((t) => t !== task);
   }
 }

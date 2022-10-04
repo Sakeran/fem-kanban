@@ -1,6 +1,5 @@
-import { eventBus } from "../eventBus";
-import type Board from "./board";
-import type BoardColumn from "./boardColumn";
+import generateId from "../../helpers/generateId";
+import type { BoardColumn } from "./boardColumn";
 
 export type Subtask = { title: string; isCompleted: boolean };
 
@@ -8,136 +7,102 @@ export type TaskData = {
   id: string;
   title: string;
   description: string;
-  status: string;
   subtasks: Subtask[];
 };
 
-export type TaskCreateData = {
-  title: string;
-  description: string;
-  status: string;
-  subtasks: string[];
-};
+export class Task {
+  public id: string;
+  public title: string;
+  public description: string;
+  public subtasks: Subtask[];
 
-export default class Task {
-  private data: TaskData;
-
-  constructor(
-    data: TaskData,
-    private parentColumn: BoardColumn,
-    private parentBoard: Board
-  ) {
-    this.data = { ...data };
-  }
-
-  get id() {
-    return this.data.id;
-  }
-
-  get title() {
-    return this.data.title;
-  }
-
-  get description() {
-    return this.data.description;
-  }
+  private _column: BoardColumn | undefined;
 
   get status() {
-    return this.data.status;
-  }
+    if (!this._column)
+      throw new Error("Tried to get the status of a task with no column.");
 
-  set status(newStatus) {
-    this.data.status = newStatus;
-  }
-
-  get subtasks() {
-    return this.data.subtasks;
-  }
-
-  get board() {
-    return this.parentBoard;
+    return this._column.name;
   }
 
   get column() {
-    return this.parentColumn;
+    if (!this._column) throw new Error("Task has no column set.");
+
+    return this._column;
   }
 
-  update({ title, description, subtasks, status }) {
-    let updatedTask = false;
+  get board() {
+    const column = this.column;
+    return column.board;
+  }
 
-    if (title) {
-      this.updateTitle(title);
-      updatedTask = true;
+  static createNewTask(title: string, description: string, subtasks: string[]) {
+    const task = new Task();
+
+    task.id = generateId();
+    task.title = title;
+    task.description = description;
+    task.subtasks = createSubtasksFromStrings(subtasks);
+
+    return task;
+  }
+
+  static loadFromData(data: TaskData) {
+    const task = new Task();
+
+    task.id = data.id;
+    task.title = data.title;
+    task.description = data.description;
+    task.subtasks = data.subtasks.map((s) => Object.assign({}, s));
+
+    return task;
+  }
+
+  serializeToData(): TaskData {
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      subtasks: this.subtasks.map((s) => Object.assign({}, s)),
+    };
+  }
+
+  setColumn(column: BoardColumn) {
+    this._column = column;
+  }
+
+  unsetColumn() {
+    this._column = undefined;
+  }
+
+  update(data: {
+    title?: string;
+    description?: string;
+    subtasks?: string[];
+    status?: string;
+  }) {
+    if (data.title) {
+      this.title = data.title;
     }
 
-    if (description) {
-      this.updateDescription(description);
-      updatedTask = true;
+    if (data.description) {
+      this.description = data.description;
     }
 
-    if (status) {
-      this.updateStatus(status);
-      updatedTask = true;
+    if (data.subtasks) {
+      this.updateSubtasks(data.subtasks);
     }
 
-    if (subtasks) {
-      const newSubtasks = subtasks.map((st) => {
-        const existing = this.subtasks.find(
-          (existing) => existing.title === st
-        );
-
-        if (existing) return existing;
-
-        return { title: st, isCompleted: false };
-      });
-
-      // Subtasks are updated if there are more or fewer of them, or if the subtasks
-      // have been reordered.
-      if (newSubtasks.length !== this.subtasks.length) {
-        this.data.subtasks = newSubtasks;
-        updatedTask = true;
-      } else {
-        for (let i = 0; i < newSubtasks.length; i++) {
-          if (newSubtasks[i].title !== this.subtasks[i].title) {
-            this.data.subtasks = newSubtasks;
-            updatedTask = true;
-            break;
-          }
-        }
-      }
-    }
-
-    if (updatedTask) {
-      eventBus.dispatch("taskUpdated", this);
+    if (data.status) {
+      this.updateColumn(data.status);
     }
   }
 
-  updateTitle(newTitle: string) {
-    if (newTitle && newTitle !== this.title) {
-      this.data.title = newTitle;
-    }
+  updateSubtasks(subtaskTitles: string[]) {
+    console.log("TODO: updateSubtasks");
   }
 
-  updateDescription(newDescription: string) {
-    if (newDescription && newDescription !== this.description) {
-      this.data.description = newDescription;
-    }
-  }
-
-  updateStatus(newStatus: string) {
-    // Check that status is valid.
-    if (!this.checkValidStatus(newStatus)) {
-      console.warn(
-        `Tried to update task's status to ${newStatus}, but that column doesn't exist.`
-      );
-    }
-
-    this.data.status = newStatus;
-
-    this.board.updateTaskColumn(this, newStatus);
-  }
-
-  toggleSubtask(subtaskTitle: string) {
+  toggleSubtask(subtaskTitle) {
     const subtask = this.subtasks.find((s) => s.title === subtaskTitle);
 
     if (!subtask) {
@@ -148,21 +113,21 @@ export default class Task {
     }
 
     subtask.isCompleted = !subtask.isCompleted;
-    eventBus.dispatch("taskUpdated", this);
   }
 
-  checkValidStatus(status) {
-    // Check that status is valid.
-    return this.board.columnNames.includes(status);
+  updateColumn(columnName: string) {
+    this.board.updateTaskColumn(this, columnName);
   }
 
-  serializeToData() {
-    return {
-      id: this.id,
-      title: this.title,
-      description: this.description,
-      status: this.status,
-      subtasks: this.subtasks,
-    } as TaskData;
+  delete() {
+    if (!this.column) return;
+
+    // Removing the task from the column is sufficient to remove it from the
+    // data structure.
+    this.column.removeTask(this);
   }
+}
+
+function createSubtasksFromStrings(subtasks: string[]): Subtask[] {
+  return subtasks.map((s) => ({ title: s, isCompleted: false }));
 }

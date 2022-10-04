@@ -1,7 +1,7 @@
 import { eventBus } from "../lib/eventBus";
 import { writable } from "svelte/store";
-import type Task from "../lib/board/task";
-import type Board from "src/lib/board/board";
+import type { Task } from "../lib/board/task";
+import type { Board } from "../lib/board/board";
 
 // Current State Store
 export const currentState = writable<string>(undefined);

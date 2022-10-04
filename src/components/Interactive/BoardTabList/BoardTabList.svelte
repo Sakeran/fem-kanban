@@ -2,7 +2,7 @@
 </script>
 
 <script lang="ts">
-  import type Board from "../../../lib/board/board";
+  import type { Board } from "../../../lib/board/board";
 
 
   import { createEventDispatcher } from "svelte";

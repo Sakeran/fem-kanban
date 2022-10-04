@@ -15,7 +15,7 @@ export const DeleteTaskState: StateMachineState = {
     });
 
     this.confirmUnsub = eventBus.subscribe("deleteTaskConfirm", () => {
-      task.board.deleteTask(task);
+      task.delete();
       stateMachine.transition("viewCurrentBoard");
     });
   },

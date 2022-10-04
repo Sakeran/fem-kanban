@@ -1,7 +1,5 @@
-import type { BoardDataUpdate } from "src/lib/board/board";
-import type Board from "src/lib/board/board";
-import type { TaskCreateData, TaskData } from "src/lib/board/task";
-import type Task from "src/lib/board/task";
+import type { Board } from "src/lib/board/board";
+import type { TaskData, Task } from "src/lib/board/task";
 
 /**
  * Mapping of event names to payloads
@@ -32,23 +30,34 @@ export type EventTypes = {
 
   // Add Task State Events
   addNewTask: void;
-  addNewTaskCreate: TaskCreateData;
+  addNewTaskCreate: {
+    title: string;
+    description: string;
+    subtasks: string[];
+    status: string;
+  };
   addNewTaskCancel: void;
 
   // Edit Board Events
   editBoard: Board;
   editBoardCancel: void;
-  editBoardUpdate: BoardDataUpdate;
+  editBoardUpdate: {
+    name: string;
+    columns: string[];
+  };
 
   // Delete Board Events
-  deleteBoard: Board,
+  deleteBoard: Board;
   deleteBoardCancel: void;
   deleteBoardConfirm: void;
 
   // Add Board Events
   addNewBoard: void;
   addNewBoardCancel: void;
-  addNewBoardCreate: BoardDataUpdate;
+  addNewBoardCreate: {
+    name: string;
+    columns: string[];
+  };
 };
 
 export type Events = keyof EventTypes;
