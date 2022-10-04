@@ -1,3 +1,4 @@
+import type { InputListAction } from "../../components/Interactive/InputList/InputList.svelte";
 import generateId from "../../helpers/generateId";
 import type { BoardColumnData } from "./boardColumn";
 import { BoardColumn } from "./boardColumn";
@@ -67,9 +68,13 @@ export class Board {
     };
   }
 
-  update(name: string, columnNames: string[]) {
+  update(
+    name: string,
+    columnNames: string[],
+    columnActions: InputListAction[]
+  ) {
     this.updateName(name);
-    this.updateColumnNames(columnNames);
+    this.updateColumnNames(columnNames, columnActions);
   }
 
   updateName(name: string) {
@@ -78,8 +83,70 @@ export class Board {
     }
   }
 
-  updateColumnNames(columnNames: string[]) {
-    console.log("TODO: updateColumnNames");
+  updateColumnNames(columnNames: string[], columnActions: InputListAction[]) {
+    // To avoid losing data, we track the individual modifications made to the corresponding
+    // input list, and mirror the sequence in place across our data.
+
+    const deletedColumns = new Map<string, BoardColumn>();
+
+    for (const action of columnActions) {
+      if (action.type === "init") {
+        // Records the state of the list before the user started modifying it.
+        // No action necessary.
+        continue;
+      }
+
+      if (action.type == "add") {
+        // User hit 'add new'.
+        // Append a new column to the end of our array.
+
+        // TODO - pick better board colors
+        const newColumn = BoardColumn.createNewColumn("", "pink");
+        this.columns.push(newColumn);
+        continue;
+      }
+
+      if (action.type === "delete") {
+        // The user hit 'delete item'.
+        // Remove the given column from our array.
+        // (Keep a reference to it, in case the user is simply reordering the columns.)
+        const column = this.columns[action.index];
+        if (!column)
+          throw new Error("Tried to delete column at an out-of-bounds index");
+
+        deletedColumns.set(column.name.toLowerCase(), column);
+
+        this.columns = this.columns.filter((c) => c !== column);
+        continue;
+      }
+
+      if (action.type === "rename") {
+        // The user updated one of the item fields.
+
+        // If the column was renamed to match a previously-deleted column, replace
+        // the column at this position with the deleted column. (Delete the previous one.)
+        // Otherwise, simply update the column name.
+
+        const column = this.columns[action.index];
+        if (!column)
+          throw new Error("Tried to rename column at an out-of-bounds index");
+
+        if (deletedColumns.has(action.value.toLowerCase())) {
+          const restoredColumn = deletedColumns.get(action.value.toLowerCase());
+          deletedColumns.delete(action.value.toLowerCase());
+          deletedColumns.set(column.name.toLowerCase(), column);
+
+          this.columns[action.index] = restoredColumn;
+        } else {
+          column.name = action.value;
+        }
+
+        continue;
+      }
+
+      // TODO - Rather than discarding any tasks in deleted columns, it would be better
+      // to place them somewhere recoverable, like an 'unsorted' column.
+    }
   }
 
   setTaskColumn(task: Task, columnName: string) {

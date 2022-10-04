@@ -15,7 +15,7 @@ export const EditBoardState: StateMachineState = {
     });
 
     this.updateUnsub = eventBus.subscribe("editBoardUpdate", (boardData) => {
-      this.currentBoard.update(boardData.name, boardData.columns);
+      this.currentBoard.update(boardData.name, boardData.columns, boardData.columnActions);
       stateMachine.transition("viewCurrentBoard");
     });
   },

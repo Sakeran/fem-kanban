@@ -1,3 +1,4 @@
+import type { InputListAction } from "src/components/Interactive/InputList/InputList.svelte";
 import type { Board } from "src/lib/board/board";
 import type { TaskData, Task } from "src/lib/board/task";
 
@@ -44,6 +45,7 @@ export type EventTypes = {
   editBoardUpdate: {
     name: string;
     columns: string[];
+    columnActions: InputListAction;
   };
 
   // Delete Board Events

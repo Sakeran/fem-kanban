@@ -7,17 +7,21 @@
   import TextInput from "../../Interactive/TextInput/TextInput.svelte";
   import Heading from "../../Typography/Heading/Heading.svelte";
 
+  import type { InputListAction } from "../../Interactive/InputList/InputList.svelte";
+
   export let title: string = "Add New Board";
   export let submitButtonText: string = "Create New Board";
   export let name = "";
   export let columns: string[] = [];
+
+  let columnActions: InputListAction[] = [];
 
   const dispatch = createEventDispatcher();
 
   function handleCreateBoard(e) {
     e.preventDefault();
     if (!formIsValid()) return;
-    dispatch("submitBoard", { name, columns });
+    dispatch("submitBoard", { name, columns, columnActions });
   }
 
   function formIsValid() {
@@ -55,6 +59,7 @@
       buttonText="Add New Column"
       itemName="column"
       bind:items={columns}
+      on:actionUpdate={(e) => (columnActions = e.detail)}
     />
     <Button style="PrimaryS" classes="w-full mt-6" on:click={handleCreateBoard}
       >{submitButtonText}</Button
