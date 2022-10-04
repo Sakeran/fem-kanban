@@ -1,3 +1,4 @@
+import filterUniqueStrings from "../../helpers/filterUniqueStrings";
 import generateId from "../../helpers/generateId";
 import type { BoardColumn } from "./boardColumn";
 
@@ -99,7 +100,14 @@ export class Task {
   }
 
   updateSubtasks(subtaskTitles: string[]) {
-    console.log("TODO: updateSubtasks");
+    this.subtasks = filterUniqueStrings(subtaskTitles).map((title) => {
+      const existing = this.subtasks.find((st) => st.title === title);
+
+      return {
+        title,
+        isCompleted: existing ? existing.isCompleted : false,
+      };
+    });
   }
 
   toggleSubtask(subtaskTitle) {
@@ -129,5 +137,5 @@ export class Task {
 }
 
 function createSubtasksFromStrings(subtasks: string[]): Subtask[] {
-  return subtasks.map((s) => ({ title: s, isCompleted: false }));
+  return filterUniqueStrings(subtasks).map((s) => ({ title: s, isCompleted: false }));
 }
