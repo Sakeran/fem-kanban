@@ -12,11 +12,14 @@
     label: { control: "text" },
     buttonText: { control: "text" },
     items: { control: "array" },
+    actionUpdate: { action: "actionUpdate" },
   }}
 />
 
 <Template let:args>
-  <div style="max-width: 26rem;"><InputList {...args} /></div>
+  <div style="max-width: 26rem;">
+    <InputList {...args} on:actionUpdate={args.actionUpdate} />
+  </div>
 </Template>
 
 <Story name="Empty" args={{ label: "Subtasks", items: [] }} />

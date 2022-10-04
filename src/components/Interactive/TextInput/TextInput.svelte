@@ -33,6 +33,7 @@
       bind:this={input}
       aria-describedby={hasErrors ? inputIdErrors : null}
       on:input={checkInput}
+      on:input
       on:blur={checkInput}
       on:change={checkInput}
       class="text-13p font-medium leading-23/13 text-black placeholder:text-black/25 dark:text-white dark:placeholder:text-white/25 basis-full outline-none bg-transparent"

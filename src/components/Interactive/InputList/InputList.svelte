@@ -1,5 +1,18 @@
+<script context="module" lang="ts">
+  type InitAction = { type: "init"; values: string[] };
+  type AddAction = { type: "add" };
+  type DeleteAction = { type: "delete"; index: number };
+  type RenameAction = { type: "rename"; index: number; value: string };
+
+  export type InputListAction =
+    | InitAction
+    | AddAction
+    | DeleteAction
+    | RenameAction;
+</script>
+
 <script lang="ts">
-  import { tick } from "svelte";
+  import { createEventDispatcher, tick } from "svelte";
   import Button from "../Button/Button.svelte";
   import TextInput from "../TextInput/TextInput.svelte";
 
@@ -12,10 +25,22 @@
 
   if (items.length === 0) items.push("");
 
+  // Keep track of the actions performed on this input.
+  // This is necessary to determine which columns are renamed, deleted, etc
+  const actions: InputListAction[] = [{ type: "init", values: [...items] }];
+
+  const dispatch = createEventDispatcher();
+  function dispatchActionUpdate() {
+    dispatch("actionUpdate", actions);
+  }
+
   let inputContainer: HTMLDivElement;
   function handleAddItem() {
     items.push("");
     items = items;
+
+    actions.push({ type: "add" });
+    dispatchActionUpdate();
 
     tick().then(() => {
       const newInput = inputContainer.querySelector("input:last-of-type");
@@ -31,6 +56,24 @@
 
     items.splice(itemIdx, 1);
     items = items;
+
+    actions.push({ type: "delete", index: itemIdx });
+    dispatchActionUpdate();
+  }
+
+  function handleRenameItem(e, itemIdx: number) {
+    // To avoid cluttering the list, if the last action was a rename on the same
+    // index, just update the value.
+    const last = actions[actions.length - 1];
+    if (last.type == "rename" && last.index == itemIdx) {
+      last.value = e.target.value;
+
+      dispatchActionUpdate();
+      return;
+    }
+
+    actions.push({ type: "rename", index: itemIdx, value: e.target.value });
+    dispatchActionUpdate();
   }
 </script>
 
@@ -46,6 +89,7 @@
           required
           visuallyHideLabel={true}
           bind:value={item}
+          on:input={(e) => handleRenameItem(e, idx)}
         />
         <button
           type="button"
