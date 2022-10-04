@@ -28,9 +28,6 @@
     // Board name must exist
     if (name.length === 0) return false;
 
-    // Require at least one column
-    if (columns.length < 1) return false;
-
     const seenColumns = new Set();
     for (const col of columns) {
       // No empty column names

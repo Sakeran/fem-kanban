@@ -4,7 +4,7 @@
   import { currentBoard } from "../../../stores/boardData";
   import Button from "../../Interactive/Button/Button.svelte";
   import { eventBus } from "../../../lib/eventBus";
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, tick } from "svelte";
 
   function handleTaskSelected(e) {
     eventBus.dispatch("viewTask", e.detail);
@@ -28,7 +28,17 @@
     container.removeEventListener("scroll", computeButtonOffset);
   });
 
+  $: {
+    // Re-compute button height whenever the currentBoard changes.
+    $currentBoard;
+    tick().then(() => {
+      computeButtonHeight();
+    });
+  }
+
   function computeButtonHeight() {
+    if (!newColumnButton) return;
+
     // Button should be as tall as the containing element, minus padding.
     const styles = window.getComputedStyle(container);
 
@@ -38,7 +48,9 @@
     newColumnButton.style.height = container.clientHeight - padding * 2 + "px";
   }
 
-  function computeButtonOffset(e) {
+  function computeButtonOffset() {
+    if (!newColumnButton) return;
+
     newColumnButton.style.marginTop = container.scrollTop + "px";
   }
 </script>
@@ -69,7 +81,9 @@
         ></button
       >
     {:else}
-      <div class="text-gray-medium">
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center gap-6 lg:gap-8 text-gray-medium"
+      >
         <Heading element="p" style="L"
           >This board is empty. Create a new column to get started.</Heading
         >

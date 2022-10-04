@@ -15,7 +15,7 @@
       title="Add New Board"
       submitButtonText="Create New Board"
       name=""
-      columns={[]}
+      columns={["Todo", "Doing", "Done"]}
       on:submitBoard={(e) => eventBus.dispatch("addNewBoardCreate", e.detail)}
     />
   </div>
