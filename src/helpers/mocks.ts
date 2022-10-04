@@ -1,8 +1,8 @@
-import Board from "../lib/board/board";
+import { Board } from "../lib/board/board";
 import { mockBoardData } from "./mockBoardData";
 
 export function createMockBoards() {
-  return mockBoardData.map((boardData) => new Board(boardData));
+  return mockBoardData.map((boardData) => Board.loadFromData(boardData));
 }
 
 export function createMockColumn() {
