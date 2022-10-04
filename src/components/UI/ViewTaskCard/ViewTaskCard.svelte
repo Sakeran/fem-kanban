@@ -49,8 +49,7 @@
     <Heading element="h2" style="L" classes="text-black dark:text-white grow"
       >{task.title}</Heading
     >
-    <div class="relative left-1">
-      <!-- <MenuToggle textAlternative="Options Menu" on:click={handleMenuToggle} /> -->
+    <div class="relative left-1 z-10">
       <Menu
         on:actionClicked={handleMenuAction}
         openButtonText="Options Menu"
@@ -62,27 +61,30 @@
     </div>
   </div>
   <Text style="L" classes="mt-6 text-gray-medium">{task.description}</Text>
-  <fieldset class="mt-6">
-    <legend class="sr-only"
-      >Subtasks ({subtasksFinished} of {subtasksTotal})</legend
-    >
-    <div
-      class="font-bold text-12p text-gray-medium dark:text-white"
-      aria-hidden="true"
-    >
-      Subtasks ({subtasksFinished} of {subtasksTotal})
-    </div>
+  {#if subtasksTotal > 0}
+    <fieldset class="mt-6">
+      <legend class="sr-only"
+        >Subtasks ({subtasksFinished} of {subtasksTotal})</legend
+      >
+      <div
+        class="font-bold text-12p text-gray-medium dark:text-white"
+        aria-hidden="true"
+      >
+        Subtasks ({subtasksFinished} of {subtasksTotal})
+      </div>
 
-    <div class="mt-4 flex flex-col gap-2">
-      {#each task.subtasks as { title, isCompleted }}
-        <SubtaskCheckbox
-          on:toggle={() => handleToggleSubtask(title)}
-          content={title}
-          completed={isCompleted}
-        />
-      {/each}
-    </div>
-  </fieldset>
+      <div class="mt-4 flex flex-col gap-2">
+        {#each task.subtasks as { title, isCompleted }}
+          <SubtaskCheckbox
+            on:toggle={() => handleToggleSubtask(title)}
+            content={title}
+            completed={isCompleted}
+          />
+        {/each}
+      </div>
+    </fieldset>
+  {/if}
+
   <Select
     options={task.board.columns.map((c) => c.name)}
     label="Current Status"

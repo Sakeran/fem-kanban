@@ -4,6 +4,8 @@
   import { createMockTask } from "../../../helpers/mocks";
 
   const task = createMockTask();
+  const noSubtasksTask = createMockTask();
+  noSubtasksTask.subtasks = [];
 </script>
 
 <Meta
@@ -17,7 +19,7 @@
   }}
 />
 
-<Template let:args>
+<Story name="Default" let:args>
   <div
     style="max-width: 30rem; padding: 1rem; background-color: hsl(0 0% 0% / .4);"
   >
@@ -29,6 +31,18 @@
       on:deleteTask={args.deleteTask}
     />
   </div>
-</Template>
+</Story>
 
-<Story name="Default" />
+<Story name="No Subtasks" let:args>
+  <div
+    style="max-width: 30rem; padding: 1rem; background-color: hsl(0 0% 0% / .4);"
+  >
+    <ViewTaskCard
+      task={noSubtasksTask}
+      on:toggleSubtask={args.toggleSubtask}
+      on:updateStatus={args.updateStatus}
+      on:editTask={args.editTask}
+      on:deleteTask={args.deleteTask}
+    />
+  </div>
+</Story>
