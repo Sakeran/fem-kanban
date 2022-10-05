@@ -4,22 +4,21 @@
 <script lang="ts">
   import type { Board } from "../../../lib/board/board";
 
-
   import { createEventDispatcher } from "svelte";
 
   import Heading from "../../Typography/Heading/Heading.svelte";
 
-  export let boards: Board[] = [];
   export let label: string = "All Boards";
   export let selectedBoardId: string = undefined;
+  export let boardOptions: [Board["id"], Board["name"]][] = [];
 
-  if (selectedBoardId === undefined && boards.length > 0)
-    selectedBoardId = boards[0].id;
+  if (selectedBoardId === undefined && boardOptions.length > 0)
+    selectedBoardId = boardOptions[0][0];
 
   const dispatch = createEventDispatcher();
 
   function handleSelection(id) {
-    if (!boards.find((b) => b.id == id)) return;
+    if (!boardOptions.find(([bid, _name]) => bid == id)) return;
 
     selectedBoardId = id;
     dispatch("boardSelected", id);
@@ -31,11 +30,14 @@
 </script>
 
 <div>
-  <Heading element="h2" classes="text-gray-medium pl-6 lg:pl-8 uppercase" style="S"
-    >{label} {boards.length ? `(${boards.length})` : ""}
+  <Heading
+    element="h2"
+    classes="text-gray-medium pl-6 lg:pl-8 uppercase"
+    style="S"
+    >{label} {boardOptions.length ? `(${boardOptions.length})` : ""}
   </Heading>
   <div class="mt-5 flex flex-col">
-    {#each boards as { name, id }}
+    {#each boardOptions as [id, name]}
       <button
         data-selected={selectedBoardId === id || null}
         class="flex gap-3 lg:gap-4 items-center min-h-button-l pl-6 lg:pl-8 rounded-tr-full rounded-br-full bg-transparent hocus:text-main-purple-normal hocus:bg-main-purple-normal/10 dark:hocus:bg-white text-gray-medium [&[data-selected]]:bg-main-purple-normal hocus:[&[data-selected]]:bg-main-purple-normal [&[data-selected]]:text-white outline-2 focus-visible:outline focus-visible:outline-main-purple-hover  motion-safe:transition-colors motion-safe:ease-in-out"

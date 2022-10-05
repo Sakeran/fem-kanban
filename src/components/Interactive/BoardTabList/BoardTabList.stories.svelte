@@ -6,13 +6,16 @@
   import { createMockBoards } from "../../../helpers/mocks";
 
   const boards = createMockBoards();
+  const boardOptions = boards.map(
+    (board) => [board.id, board.name] as [string, string]
+  );
 </script>
 
 <Meta
   title="Interactive/BoardTabList"
   component={BoardTabList}
   argTypes={{
-    boards: { control: "object" },
+    boardOptions: { control: "object" },
     label: { control: "text" },
     selectedBoardId: { control: "number" },
 
@@ -31,19 +34,14 @@
   </div>
 </Template>
 
-<Story name="Empty List" args={{ boards: [] }} />
+<Story name="Empty List" args={{ boardOptions: [] }} />
 
-<Story
-  name="Populated List (Default Selection)"
-  args={{
-    boards: boards,
-  }}
-/>
+<Story name="Populated List (Default Selection)" args={{ boardOptions }} />
 
 <Story
   name="Populated List (Explicit Selection)"
   args={{
-    boards: boards,
+    boardOptions,
     selectedBoardId: 3,
   }}
 />
@@ -51,7 +49,7 @@
 <Story
   name="Select Board"
   args={{
-    boards: boards,
+    boardOptions,
     selectedBoardId: 1,
   }}
   play={async ({ args, canvasElement }) => {
@@ -65,12 +63,13 @@
     const { detail: boardId } = args.boardSelected.mock.lastCall[0];
     expect(boardId).toBe("1");
   }}
+  let:args
 />
 
 <Story
   name="Create New Board"
   args={{
-    boards: boards,
+    boardOptions,
     selectedBoardId: 1,
   }}
   play={async ({ args, canvasElement }) => {

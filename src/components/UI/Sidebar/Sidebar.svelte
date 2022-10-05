@@ -33,7 +33,7 @@
   </div>
 
   <BoardTabList
-    boards={$boards}
+    boardOptions={$boards.map(b => ([b.id, b.name]))}
     selectedBoardId={$currentBoardId}
     on:boardSelected={(e) => setCurrentBoardId(e.detail)}
     on:createNewBoard={() => eventBus.dispatch("addNewBoard")}
