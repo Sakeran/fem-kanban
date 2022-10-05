@@ -32,7 +32,7 @@
 {#if open}
   <div
     use:modal={{ onRequestClose }}
-    in:scale={{ duration: checkReducedMotion(150, 0) }}
+    transition:scale={{ duration: checkReducedMotion(150, 0) }}
     aria-label={aria.label || null}
     aria-labelledby={aria.labelledby || null}
     aria-describedby={aria.describedby || null}
@@ -70,18 +70,5 @@
 
   .modal-container > * {
     position: relative;
-  }
-
-  .modal-container:not(:last-child) > *::before {
-    content: "";
-    pointer-events: none;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-
-    background-color: hsla(0, 0%, 0%, 0.5);
   }
 </style>

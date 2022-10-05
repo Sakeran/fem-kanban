@@ -45,7 +45,7 @@
     aria={{ label: "Single Modal Example" }}
   >
     <div style="width: 100vw; max-width: 30rem;">
-      <ViewTaskCard {task} {board} />
+      <ViewTaskCard {task} />
     </div>
   </Modal>
 
