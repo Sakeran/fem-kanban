@@ -50,6 +50,12 @@ export class BoardColumn {
     return column;
   }
 
+  dispatchChangeEvent() {
+    if (this.board) {
+      this.board.dispatchChangeEvent();
+    }
+  }
+
   serializeToData(): BoardColumnData {
     return {
       id: this.id,
@@ -73,6 +79,8 @@ export class BoardColumn {
 
     task.setColumn(this);
     this.tasks.push(task);
+
+    this.dispatchChangeEvent();
   }
 
   removeTask(task: Task) {
@@ -85,6 +93,8 @@ export class BoardColumn {
 
     task.unsetColumn();
     this.tasks = this.tasks.filter((t) => t !== task);
+
+    this.dispatchChangeEvent();
   }
 
   updateTasks(tasks: any[]) {
@@ -103,5 +113,7 @@ export class BoardColumn {
       newTask.setColumn(this);
       this.tasks.push(newTask);
     }
+
+    this.dispatchChangeEvent();
   }
 }

@@ -60,7 +60,7 @@
     <div class="sm:hidden">
       <IconButton
         textAlternative="Add New Task"
-        disabled={$currentBoard.columns.length == 0}
+        disabled={$currentBoard ? $currentBoard.columns.length == 0 : false}
         on:click={() => dispatch("addNewTask")}
         ><svg
           width="12"
@@ -81,7 +81,7 @@
       <Button
         style="PrimaryNarrow"
         on:click={() => dispatch("addNewTask")}
-        disabled={$currentBoard.columns.length == 0}
+        disabled={$currentBoard ? $currentBoard.columns.length == 0 : false}
         ><span><span aria-hidden="true">+ </span>Add New Task</span></Button
       >
     </div>

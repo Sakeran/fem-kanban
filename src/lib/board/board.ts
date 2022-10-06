@@ -1,5 +1,6 @@
 import type { InputListAction } from "../../components/Interactive/InputList/InputList.svelte";
 import generateId from "../../helpers/generateId";
+import { eventBus } from "../eventBus";
 import type { BoardColumnData } from "./boardColumn";
 import { BoardColumn } from "./boardColumn";
 import type { Task } from "./task";
@@ -60,6 +61,10 @@ export class Board {
     return board;
   }
 
+  dispatchChangeEvent() {
+    eventBus.dispatch("boardUpdated", this);
+  }
+
   serializeToData(): BoardData {
     return {
       id: this.id,
@@ -75,6 +80,8 @@ export class Board {
   ) {
     this.updateName(name);
     this.updateColumnNames(columnNames, columnActions);
+
+    this.dispatchChangeEvent();
   }
 
   updateName(name: string) {
@@ -152,6 +159,8 @@ export class Board {
   setTaskColumn(task: Task, columnName: string) {
     const column = this.getColumn(columnName);
     column.addTask(task);
+
+    this.dispatchChangeEvent();
   }
 
   updateTaskColumn(task: Task, columnName: string) {
@@ -160,5 +169,7 @@ export class Board {
 
     oldColumn.removeTask(task);
     newColumn.addTask(task);
+
+    this.dispatchChangeEvent();
   }
 }

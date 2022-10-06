@@ -59,6 +59,12 @@ export class Task {
     return task;
   }
 
+  dispatchChangeEvent() {
+    if (this.column) {
+      this.column.dispatchChangeEvent();
+    }
+  }
+
   serializeToData(): TaskData {
     return {
       id: this.id,
@@ -97,6 +103,8 @@ export class Task {
     if (data.status) {
       this.updateColumn(data.status);
     }
+
+    this.dispatchChangeEvent();
   }
 
   updateSubtasks(subtaskTitles: string[]) {
@@ -121,6 +129,7 @@ export class Task {
     }
 
     subtask.isCompleted = !subtask.isCompleted;
+    this.dispatchChangeEvent();
   }
 
   updateColumn(columnName: string) {

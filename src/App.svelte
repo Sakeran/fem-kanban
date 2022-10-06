@@ -1,5 +1,7 @@
 <script lang="ts">
   import AppLayout from "./components/UI/AppLayout/AppLayout.svelte";
+  import { eventBus } from "./lib/eventBus";
+  import { saveBoardsToLocalStorage } from "./lib/saver";
   import { stateMachine } from "./lib/stateMachine/stateMachine";
   import AddBoardModal from "./modals/AddBoardModal.svelte";
   import AddTaskModal from "./modals/AddTaskModal.svelte";
@@ -10,6 +12,7 @@
   import ViewTaskModal from "./modals/ViewTaskModal.svelte";
 
   import { colorScheme } from "./stores/appControls";
+  import { boards } from "./stores/boardData";
 
   // Setup state machine.
   stateMachine.start("loading");
@@ -23,6 +26,21 @@
     }
   }
 
+  // Handle data persistence
+  let willSave = false;
+  function handleSave() {
+
+    if (willSave) return;
+
+    willSave = true;
+    setTimeout(() => {
+      saveBoardsToLocalStorage($boards);
+      willSave = false;
+    }, 0);
+  }
+  eventBus.on("boardUpdated", handleSave);
+  eventBus.on("deleteBoardConfirm", handleSave);
+  eventBus.on("addNewBoardCreate", handleSave);
 </script>
 
 <!-- App Layout -->
@@ -34,8 +52,8 @@
 <!-- Edit Task Modal -->
 <EditTaskModal />
 
- <!-- Delete Task Modal  -->
- <DeleteTaskModal />
+<!-- Delete Task Modal  -->
+<DeleteTaskModal />
 
 <!-- Add New Task Modal -->
 <AddTaskModal />
