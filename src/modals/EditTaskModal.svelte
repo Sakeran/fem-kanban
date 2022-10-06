@@ -10,6 +10,7 @@
 <Modal
   open={$currentState == "editTask"}
   on:requestClose={() => eventBus.dispatch("editTaskCancel")}
+  aria={{ labelledby: "edit-task-card-header" }}
 >
   <div class="w-screen max-w-[30rem] mx-auto p-4 box-content">
     <EditTaskCard

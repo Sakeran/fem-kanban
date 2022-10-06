@@ -51,7 +51,7 @@
 
 <Card borderRadius={6} paddingStyle="Modal">
   <form on:submit={handleSubmitTask}>
-    <Heading element="h2" classes="text-black dark:text-white"
+    <Heading id="edit-task-card-header" element="h2" classes="text-black dark:text-white"
       >{cardTitle}</Heading
     >
     <TextInput

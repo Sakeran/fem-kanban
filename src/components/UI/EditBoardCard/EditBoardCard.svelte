@@ -44,7 +44,7 @@
 
 <Card borderRadius={6} paddingStyle="Modal">
   <form on:submit={handleCreateBoard}>
-    <Heading element="h2" classes="text-black dark:text-white">{title}</Heading>
+    <Heading id="edit-board-card-header" element="h2" classes="text-black dark:text-white">{title}</Heading>
     <TextInput
       bind:value={name}
       label="Board Name"

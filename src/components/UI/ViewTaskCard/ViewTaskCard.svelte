@@ -46,7 +46,7 @@
 
 <Card borderRadius={6} paddingStyle="Modal">
   <div class="flex items-center">
-    <Heading element="h2" style="L" classes="text-black dark:text-white grow"
+    <Heading id="view-task-card-header" element="h2" style="L" classes="text-black dark:text-white grow"
       >{task.title}</Heading
     >
     <div class="relative left-1 z-10">

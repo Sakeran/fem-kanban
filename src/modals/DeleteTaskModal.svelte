@@ -9,6 +9,7 @@
 <Modal
   open={$currentState == "deleteTask"}
   on:requestClose={() => eventBus.dispatch("deleteTaskCancel")}
+  aria={{ labelledby: "delete-item-card-header" }}
 >
   <div class="w-screen max-w-[30rem] mx-auto p-4 box-content">
     <DeleteItemCard

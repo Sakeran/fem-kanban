@@ -8,6 +8,7 @@
 <Modal
   open={$currentState == "viewTask"}
   on:requestClose={() => eventBus.dispatch("viewTaskClose")}
+  aria={{labelledby:"view-task-card-header"}}
 >
   <div class="w-screen max-w-[30rem] mx-auto p-4 box-content">
     <ViewTaskCard

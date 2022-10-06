@@ -9,6 +9,7 @@
 <Modal
   open={$currentState == "addNewBoard"}
   on:requestClose={() => eventBus.dispatch("addNewBoardCancel")}
+  aria={{ labelledby: "edit-board-card-header" }}
 >
   <div class="w-screen max-w-[30rem] mx-auto p-4 box-content">
     <EditBoardCard
