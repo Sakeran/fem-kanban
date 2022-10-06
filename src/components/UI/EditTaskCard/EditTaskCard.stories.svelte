@@ -74,10 +74,6 @@
 
     await userEvent.type(titleInput, "Test Task");
 
-    // Should not submit without a subtask
-    await userEvent.click(createTaskButton);
-    expect(createTaskFn).not.toHaveBeenCalled();
-
     // Input description (should be optional)
     await userEvent.type(descInput, "Some task description");
 

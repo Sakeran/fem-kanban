@@ -32,9 +32,6 @@
     // Task title must not be blank
     if (title.length === 0) return false;
 
-    // Require at least one subtask
-    if (subtasks.length < 1) return false;
-
     const seenSubtasks = new Set();
     for (const subtask of subtasks) {
       // No empty subtask names

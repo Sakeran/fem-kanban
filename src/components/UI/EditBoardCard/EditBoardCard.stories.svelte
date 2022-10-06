@@ -55,10 +55,6 @@
 
     await userEvent.type(nameInput, "Test Board Name");
 
-    // Should not submit without a column
-    await userEvent.click(createBoardButton);
-    expect(createBoardFn).not.toHaveBeenCalled();
-
     // Input first column name
     await userEvent.click(addNewColumnButton);
     const firstColumnInput = canvas.getByLabelText("blank column");
