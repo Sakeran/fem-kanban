@@ -21,9 +21,11 @@
       No subtasks
     {/if}
   </Text>
-  <button
+  <div
+    role="button"
     on:click
-    class="block w-full absolute inset-0 rounded-lg outline-2 focus-visible:outline outline-offset-4 focus-visible:outline-main-purple-hover motion-safe:transition-colors motion-safe:ease-in-out"
-    ><span class="sr-only">View Task</span></button
+    class="cursor-pointer block w-full absolute inset-0 rounded-lg outline-2 focus-visible:outline outline-offset-4 focus-visible:outline-main-purple-hover motion-safe:transition-colors motion-safe:ease-in-out"
   >
+    <span class="sr-only">View Task</span>
+  </div>
 </Card>

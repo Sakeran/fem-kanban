@@ -86,4 +86,22 @@ export class BoardColumn {
     task.unsetColumn();
     this.tasks = this.tasks.filter((t) => t !== task);
   }
+
+  updateTasks(tasks: any[]) {
+    // Note - Our drag-and-drop library breaks the prototype chain,
+    // so upon update we may need to restore it for some items.
+    this.tasks = [];
+    for (const task of tasks) {
+      if (task instanceof Task) {
+        this.tasks.push(task);
+        continue;
+      }
+
+      const newTask = new Task();
+
+      Object.assign(newTask, task);
+      newTask.setColumn(this);
+      this.tasks.push(newTask);
+    }
+  }
 }

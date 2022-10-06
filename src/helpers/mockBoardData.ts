@@ -1,20 +1,25 @@
 import type { BoardData } from "src/lib/board/board";
 
+let id = 0;
+
+function generateId() {
+  return (id++).toString();
+}
+
 export const mockBoardData: BoardData[] = [
   {
-    id: "0",
+    id: generateId(),
     name: "Platform Launch",
     columns: [
       {
-        id: "1",
+        id: generateId(),
         name: "Todo",
         boardColor: "#49C4E5",
         tasks: [
           {
-            id: "0",
+            id: generateId(),
             title: "Build UI for onboarding flow",
             description: "",
-            status: "Todo",
             subtasks: [
               {
                 title: "Sign up page",
@@ -31,10 +36,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "1",
+            id: generateId(),
             title: "Build UI for search",
             description: "",
-            status: "Todo",
             subtasks: [
               {
                 title: "Search page",
@@ -43,10 +47,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "2",
+            id: generateId(),
             title: "Build settings UI",
             description: "",
-            status: "Todo",
             subtasks: [
               {
                 title: "Account page",
@@ -59,11 +62,10 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "3",
+            id: generateId(),
             title: "QA and test all major user journeys",
             description:
               "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
-            status: "Todo",
             subtasks: [
               {
                 title: "Internal testing",
@@ -78,15 +80,14 @@ export const mockBoardData: BoardData[] = [
         ],
       },
       {
-        id: "2",
+        id: generateId(),
         name: "Doing",
         boardColor: "#8471F2",
         tasks: [
           {
-            id: "4",
+            id: generateId(),
             title: "Design settings and search pages",
             description: "",
-            status: "Doing",
             subtasks: [
               {
                 title: "Settings - Account page",
@@ -103,10 +104,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "5",
+            id: generateId(),
             title: "Add account management endpoints",
             description: "",
-            status: "Doing",
             subtasks: [
               {
                 title: "Upgrade plan",
@@ -123,10 +123,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "6",
+            id: generateId(),
             title: "Design onboarding flow",
             description: "",
-            status: "Doing",
             subtasks: [
               {
                 title: "Sign up page",
@@ -143,10 +142,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "7",
+            id: generateId(),
             title: "Add search enpoints",
             description: "",
-            status: "Doing",
             subtasks: [
               {
                 title: "Add search endpoint",
@@ -159,10 +157,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "8",
+            id: generateId(),
             title: "Add authentication endpoints",
             description: "",
-            status: "Doing",
             subtasks: [
               {
                 title: "Define user model",
@@ -175,12 +172,11 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "9",
+            id: generateId(),
             title:
               "Research pricing points of various competitors and trial different business models",
             description:
               "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-            status: "Doing",
             subtasks: [
               {
                 title: "Research competitor pricing and business models",
@@ -200,16 +196,15 @@ export const mockBoardData: BoardData[] = [
         ],
       },
       {
-        id: "3",
+        id: generateId(),
         name: "Done",
         boardColor: "#67E2AE",
         tasks: [
           {
-            id: "10",
+            id: generateId(),
             title: "Conduct 5 wireframe tests",
             description:
               "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
-            status: "Done",
             subtasks: [
               {
                 title: "Complete 5 wireframe prototype tests",
@@ -218,11 +213,10 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "11",
+            id: generateId(),
             title: "Create wireframe prototype",
             description:
               "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
-            status: "Done",
             subtasks: [
               {
                 title: "Create clickable wireframe prototype in Balsamiq",
@@ -231,11 +225,10 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "12",
+            id: generateId(),
             title: "Review results of usability tests and iterate",
             description:
               "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
-            status: "Done",
             subtasks: [
               {
                 title:
@@ -253,11 +246,10 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "13",
+            id: generateId(),
             title:
               "Create paper prototypes and conduct 10 usability tests with potential customers",
             description: "",
-            status: "Done",
             subtasks: [
               {
                 title: "Create paper prototypes for version one",
@@ -270,11 +262,10 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "14",
+            id: generateId(),
             title: "Market discovery",
             description:
               "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
-            status: "Done",
             subtasks: [
               {
                 title: "Interview 10 prospective customers",
@@ -283,10 +274,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "15",
+            id: generateId(),
             title: "Competitor analysis",
             description: "",
-            status: "Done",
             subtasks: [
               {
                 title: "Find direct and indirect competitors",
@@ -299,11 +289,10 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "16",
+            id: generateId(),
             title: "Research the market",
             description:
               "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
-            status: "Done",
             subtasks: [
               {
                 title: "Write up research analysis",
@@ -320,19 +309,18 @@ export const mockBoardData: BoardData[] = [
     ],
   },
   {
-    id: "1",
+    id: generateId(),
     name: "Marketing Plan",
     columns: [
       {
-        id: "4",
+        id: generateId(),
         name: "Todo",
         boardColor: "#49C4E5",
         tasks: [
           {
-            id: "17",
+            id: generateId(),
             title: "Plan Product Hunt launch",
             description: "",
-            status: "Todo",
             subtasks: [
               {
                 title: "Find hunter",
@@ -361,10 +349,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "18",
+            id: generateId(),
             title: "Share on Show HN",
             description: "",
-            status: "",
             subtasks: [
               {
                 title: "Draft out HN post",
@@ -381,10 +368,9 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "19",
+            id: generateId(),
             title: "Write launch article to publish on multiple channels",
             description: "",
-            status: "",
             subtasks: [
               {
                 title: "Write article",
@@ -407,13 +393,13 @@ export const mockBoardData: BoardData[] = [
         ],
       },
       {
-        id: "5",
+        id: generateId(),
         boardColor: "pink",
         name: "Doing",
         tasks: [],
       },
       {
-        id: "6",
+        id: generateId(),
         boardColor: "pink",
         name: "Done",
         tasks: [],
@@ -421,19 +407,18 @@ export const mockBoardData: BoardData[] = [
     ],
   },
   {
-    id: "2",
+    id: generateId(),
     name: "Roadmap",
     columns: [
       {
-        id: "7",
+        id: generateId(),
         boardColor: "pink",
         name: "Now",
         tasks: [
           {
-            id: "20",
+            id: generateId(),
             title: "Launch version one",
             description: "",
-            status: "",
             subtasks: [
               {
                 title: "Launch privately to our waitlist",
@@ -446,11 +431,10 @@ export const mockBoardData: BoardData[] = [
             ],
           },
           {
-            id: "21",
+            id: generateId(),
             title: "Review early feedback and plan next steps for roadmap",
             description:
               "Beyond the initial launch, we're keeping the initial roadmap completely empty. This meeting will help us plan out our next steps based on actual customer feedback.",
-            status: "",
             subtasks: [
               {
                 title: "Interview 10 customers",
@@ -469,13 +453,13 @@ export const mockBoardData: BoardData[] = [
         ],
       },
       {
-        id: "7",
+        id: generateId(),
         boardColor: "pink",
         name: "Next",
         tasks: [],
       },
       {
-        id: "8",
+        id: generateId(),
         boardColor: "pink",
         name: "Later",
         tasks: [],
