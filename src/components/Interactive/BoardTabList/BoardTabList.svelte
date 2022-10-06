@@ -59,7 +59,9 @@
           />
         </svg>
 
-        <Heading element="span" style="M">{name}</Heading>
+        <Heading element="span" style="M"
+          ><span class="sr-only"> Open </span>{name}</Heading
+        >
       </button>
     {/each}
   </div>

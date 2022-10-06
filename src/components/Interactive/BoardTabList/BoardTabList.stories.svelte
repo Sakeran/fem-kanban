@@ -61,7 +61,7 @@
     expect(args.boardSelected).toHaveBeenCalled();
 
     const { detail: boardId } = args.boardSelected.mock.lastCall[0];
-    expect(boardId).toBe("1");
+    expect(boardId).toBe(boardOptions[1][0]);
   }}
   let:args
 />
