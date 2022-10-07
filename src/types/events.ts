@@ -6,6 +6,10 @@ import type { TaskData, Task } from "src/lib/board/task";
  * Mapping of event names to payloads
  */
 export type EventTypes = {
+  // App State Events
+  colorSchemeToggled: 'dark' | 'light';
+  sidebarToggled: boolean;
+
   // Data Events
   taskUpdated: Task;
   boardUpdated: Board;

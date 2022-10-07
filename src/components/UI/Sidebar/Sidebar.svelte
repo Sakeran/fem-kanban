@@ -15,6 +15,7 @@
 
   function handleToggle(e) {
     sidebarExpanded.set(e.detail);
+    eventBus.dispatch("sidebarToggled", e.detail);
   }
 </script>
 
@@ -33,13 +34,18 @@
   </div>
 
   <BoardTabList
-    boardOptions={$boards.map(b => ([b.id, b.name]))}
+    boardOptions={$boards.map((b) => [b.id, b.name])}
     selectedBoardId={$currentBoardId}
     on:boardSelected={(e) => setCurrentBoardId(e.detail)}
     on:createNewBoard={() => eventBus.dispatch("addNewBoard")}
   />
   <div class="px-6 mt-auto mb-4">
-    <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />
+    <ThemeToggle
+      on:toggled={(e) => {
+        colorScheme.set(e.detail);
+        eventBus.dispatch("colorSchemeToggled", e.detail);
+      }}
+    />
   </div>
 </div>
 

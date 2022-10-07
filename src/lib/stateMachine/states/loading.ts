@@ -1,27 +1,43 @@
-import { loadBoardsFromLocalStorage } from "../../../lib/saver";
-// import { mockBoardData } from "../../../helpers/mockBoardData";
+import {
+  loadAppStateFromLocalStorage,
+  loadBoardsFromLocalStorage,
+} from "../../../lib/saver";
 import { Board } from "../../../lib/board/board";
 import { loadBoards } from "../../../stores/boardData";
 import { mockBoardData } from "../../../helpers/mockBoardData";
 import { stateMachine } from "../stateMachine";
 import type { StateMachineState } from "../types";
+import { colorScheme, sidebarExpanded } from "../../../stores/appControls";
 
 export const LoadingState: StateMachineState = {
   name: "loading",
 
   onEnter() {
     this.loadBoards();
+    this.loadAppState();
+    stateMachine.transition("viewCurrentBoard");
   },
 
-  async loadBoards() {
-    try {
-      const boards = loadBoardsFromLocalStorage();
-      loadBoards(boards);
+  loadBoards() {
+    const boards = loadBoardsFromLocalStorage();
+    if (boards === null) return this.loadDefaultBoards();
 
-      stateMachine.transition("viewCurrentBoard");
+    try {
+      loadBoards(boards);
     } catch (e) {
-      loadBoards(mockBoardData.map((bd) => Board.loadFromData(bd)));
-      stateMachine.transition("viewCurrentBoard");
+      this.loadDefaultBoards();
     }
+  },
+
+  loadAppState() {
+    const appState = loadAppStateFromLocalStorage();
+    if (appState === null) return;
+
+    colorScheme.set(appState.colorScheme);
+    sidebarExpanded.set(appState.sidebarExpanded);
+  },
+
+  loadDefaultBoards() {
+    loadBoards(mockBoardData.map((bd) => Board.loadFromData(bd)));
   },
 };

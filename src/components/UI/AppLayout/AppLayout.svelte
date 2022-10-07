@@ -42,7 +42,12 @@
           on:createNewBoard={() => eventBus.dispatch("addNewBoard")}
         />
         <div class="px-6 mt-auto mb-4">
-          <ThemeToggle on:toggled={(e) => colorScheme.set(e.detail)} />
+          <ThemeToggle
+            on:toggled={(e) => {
+              colorScheme.set(e.detail);
+              eventBus.dispatch("colorSchemeToggled", e.detail);
+            }}
+          />
         </div>
       </div>
     </div>

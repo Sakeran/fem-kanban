@@ -1,7 +1,10 @@
 <script lang="ts">
   import AppLayout from "./components/UI/AppLayout/AppLayout.svelte";
   import { eventBus } from "./lib/eventBus";
-  import { saveBoardsToLocalStorage } from "./lib/saver";
+  import {
+    saveAppStateToLocalStorage,
+    saveBoardsToLocalStorage,
+  } from "./lib/saver";
   import { stateMachine } from "./lib/stateMachine/stateMachine";
   import AddBoardModal from "./modals/AddBoardModal.svelte";
   import AddTaskModal from "./modals/AddTaskModal.svelte";
@@ -11,7 +14,7 @@
   import EditTaskModal from "./modals/EditTaskModal.svelte";
   import ViewTaskModal from "./modals/ViewTaskModal.svelte";
 
-  import { colorScheme } from "./stores/appControls";
+  import { colorScheme, sidebarExpanded } from "./stores/appControls";
   import { boards } from "./stores/boardData";
 
   // Setup state machine.
@@ -26,21 +29,38 @@
     }
   }
 
-  // Handle data persistence
-  let willSave = false;
-  function handleSave() {
+  // Handle boards data persistence
+  let willSaveBoards = false;
+  function handleSaveBoards() {
+    if (willSaveBoards) return;
 
-    if (willSave) return;
-
-    willSave = true;
+    willSaveBoards = true;
     setTimeout(() => {
       saveBoardsToLocalStorage($boards);
-      willSave = false;
+      willSaveBoards = false;
     }, 0);
   }
-  eventBus.on("boardUpdated", handleSave);
-  eventBus.on("deleteBoardConfirm", handleSave);
-  eventBus.on("addNewBoardCreate", handleSave);
+  eventBus.on("boardUpdated", handleSaveBoards);
+  eventBus.on("deleteBoardConfirm", handleSaveBoards);
+  eventBus.on("addNewBoardCreate", handleSaveBoards);
+
+  // Handle app state persistence
+  let willSaveAppState = false;
+  function handleSaveAppState() {
+    if (willSaveAppState) return;
+
+    willSaveAppState = true;
+    setTimeout(() => {
+      saveAppStateToLocalStorage({
+        sidebarExpanded: $sidebarExpanded,
+        colorScheme: $colorScheme,
+      });
+      willSaveAppState = false;
+    }, 0);
+  }
+  eventBus.on("sidebarToggled", handleSaveAppState);
+  eventBus.on("colorSchemeToggled", handleSaveAppState);
+
 </script>
 
 <!-- App Layout -->
