@@ -1,1 +1,21 @@
 # fem-kanban
+
+This is a solution to the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+
+## Notes
+
+(Completed October 7th, 2022)
+
+This will be my final FrontEndMentor project for a while, so I wanted to make this app as complete as possible, given the one-month deadline I set for myself. That is, it was my aim to not only implement the design according to the specification, but also to create a robust library of composable, testable components, and a suite of unit- and E2E-tests to ensure every part of the app worked exactly according to design. Accessibility was going to be a major focus from the start, with regular manual testing across various devices and ATs. I also had some more features in mind: board-sharing and collaboration with other users, and custom SSR, and a camera feature for generating todos, and…
+
+Yeah, that was *last* month. The end result that came rattling over the finish line earlier today is very much scaled back from my starting goal - my ambitions steadily eroded as development on the project went on. Much of this came down to my insistence on implementing nearly all of the functionality by hand, some of which I’d never encountered before and needed to spend time researching. Annoyingly, my initial vision was probably acheivable if I’d been more willing to rely on external libraries from the start, rather than picking them up out of necessity later on. But then, borrowing third-party, black-box code has always seemed slightly against the spirit of these challenges to me.
+
+Anyway. The majority of my development time went toward the component library I mentioned earlier, and I was able to build out almost all of the front-end in Storybook. The [resulting component library](https://ephemeral-frangollo-478e6e.netlify.app) has been put online over here, and it’s probably the piece of this project that I’m most proud of. It’s at least 90% functional and probably won’t catch fire. Here I was able to make good on at least some of my “composable and testable” goals, since Storybook makes it easy to test in isolation, and I made some use of its Interactions feature to catch a lot of low-level UI bugs that I would have otherwise missed.
+
+In the end, though, Component Driven Development ended up taking more of my time than I expected, leaving less than half of my time remaining to do everything else. It was around this point that I realized I probably wasn’t going to implement every feature that I wanted to. Unfortunately, signs of this time crunch are definitely present in the final code, which was implemented very quickly and often with only brief manual testing for correctness. All this left me with an application that I can’t really consider as anything more than a prototype; it meets all of the project requirements, but not to any standard I would consider acceptable. 
+
+Regrettably, I don’t have infinite free time, so this is where development on the Kanban app ends for me. If I were to redo this at some point, there are two things in particular I would probably do differently. FIrst, as I mentioned above, I’d want to more carefully consider which pieces of the app I intended to implement myself, and which pieces were preferable/necessary to offload to some third-pary library. Custom logic is fun and educational, but it is *slow*. Secondly, I would have started the development process by formalizing the back-end and model/data layer, rather than jumping straight into components. Building components from the bottom-up in isolation was a good experience, but not knowing where my data would eventually be coming from led to me making some mistakes that cost time to fix later on.
+
+I could write a ton more about this project, but even the interesting stuff above has gone on for a while. For a final project, this wasn’t everything I’d hoped it would be. But I could have done a lot worse.
+
+A live version of this project may be found [here](https://amorse-fem-kanban.netlify.app/).
