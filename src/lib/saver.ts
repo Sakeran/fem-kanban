@@ -1,16 +1,18 @@
 import { Board } from "./board/board";
 
-export function loadBoardsFromLocalStorage() {
-  const data = window.localStorage.getItem("boardData");
+const boardDataKey = "kanban-board-data";
 
-  const boardData = JSON.parse(data);
+export function loadBoardsFromLocalStorage() {
+  const json = window.localStorage.getItem(boardDataKey);
+  const boardData = JSON.parse(json);
   const boards = boardData.map((bd) => Board.loadFromData(bd)) as Board[];
 
   return boards;
 }
 
 export function saveBoardsToLocalStorage(boards: Board[]) {
-  const data = boards.map((b) => b.serializeToData());
+  const boardData = boards.map((b) => b.serializeToData());
+  const json = JSON.stringify(boardData);
 
-  window.localStorage.setItem("boardData", JSON.stringify(data));
+  window.localStorage.setItem(boardDataKey, json);
 }
