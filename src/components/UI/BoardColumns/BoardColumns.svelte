@@ -76,7 +76,7 @@
         class="new-column-button relative basis-[17.5rem] shrink-0 rounded-sm grid place-items-center text-gray-medium hocus:text-main-purple-normal"
         bind:this={newColumnButton}
         on:click={() => eventBus.dispatch("editBoard", $currentBoard)}
-        ><Heading style="XL" classes="z-10"
+        ><Heading element="span" style="XL" classes="z-10"
           ><span aria-hidden="true">+</span> New Column</Heading
         ></button
       >
