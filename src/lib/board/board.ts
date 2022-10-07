@@ -108,7 +108,8 @@ export class Board {
         // Append a new column to the end of our array.
 
         // TODO - pick better board colors
-        const newColumn = BoardColumn.createNewColumn("", "pink");
+        const newColumn = BoardColumn.createNewColumn("", "#df8fd9");
+        newColumn.setBoard(this);
         this.columns.push(newColumn);
         continue;
       }
