@@ -394,13 +394,13 @@ export const mockBoardData: BoardData[] = [
       },
       {
         id: generateId(),
-        boardColor: "pink",
+        boardColor: "#df8fd9",
         name: "Doing",
         tasks: [],
       },
       {
         id: generateId(),
-        boardColor: "pink",
+        boardColor: "#df8fd9",
         name: "Done",
         tasks: [],
       },
@@ -412,7 +412,7 @@ export const mockBoardData: BoardData[] = [
     columns: [
       {
         id: generateId(),
-        boardColor: "pink",
+        boardColor: "#df8fd9",
         name: "Now",
         tasks: [
           {
@@ -454,13 +454,13 @@ export const mockBoardData: BoardData[] = [
       },
       {
         id: generateId(),
-        boardColor: "pink",
+        boardColor: "#df8fd9",
         name: "Next",
         tasks: [],
       },
       {
         id: generateId(),
-        boardColor: "pink",
+        boardColor: "#df8fd9",
         name: "Later",
         tasks: [],
       },

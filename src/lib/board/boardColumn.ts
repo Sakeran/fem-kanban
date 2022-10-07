@@ -97,6 +97,11 @@ export class BoardColumn {
     this.dispatchChangeEvent();
   }
 
+  updateColor(hex: string) {
+    this.boardColor = hex;
+    this.dispatchChangeEvent();
+  }
+
   updateTasks(tasks: any[]) {
     // Note - Our drag-and-drop library breaks the prototype chain,
     // so upon update we may need to restore it for some items.

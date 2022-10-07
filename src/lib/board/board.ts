@@ -39,7 +39,7 @@ export class Board {
     board.name = name;
     // TODO -- pick better board colors
     board.columns = columnNames.map((name) => {
-      const column = BoardColumn.createNewColumn(name, "red");
+      const column = BoardColumn.createNewColumn(name, "#a618cf");
       column.setBoard(board);
       return column;
     });
