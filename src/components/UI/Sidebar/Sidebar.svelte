@@ -5,7 +5,7 @@
 
   import { colorScheme, sidebarExpanded } from "../../../stores/appControls";
   import {
-    boards,
+    boardTabOptions,
     currentBoardId,
     setCurrentBoardId,
   } from "../../../stores/boardData";
@@ -34,7 +34,7 @@
   </div>
 
   <BoardTabList
-    boardOptions={$boards.map((b) => [b.id, b.name])}
+    boardOptions={$boardTabOptions}
     selectedBoardId={$currentBoardId}
     on:boardSelected={(e) => setCurrentBoardId(e.detail)}
     on:createNewBoard={() => eventBus.dispatch("addNewBoard")}

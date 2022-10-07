@@ -15,7 +15,7 @@
   import ViewTaskModal from "./modals/ViewTaskModal.svelte";
 
   import { colorScheme, sidebarExpanded } from "./stores/appControls";
-  import { boards } from "./stores/boardData";
+  import { boards, updateBoardTabOptions } from "./stores/boardData";
 
   // Setup state machine.
   stateMachine.start("loading");
@@ -60,6 +60,13 @@
   }
   eventBus.on("sidebarToggled", handleSaveAppState);
   eventBus.on("colorSchemeToggled", handleSaveAppState);
+
+  // We need to manually trigger an update of the board tabs
+  // when a board is updated, since the board store itself isn't
+  // mutated.
+  eventBus.on("boardUpdated", () => {
+    updateBoardTabOptions();
+  })
 
 </script>
 

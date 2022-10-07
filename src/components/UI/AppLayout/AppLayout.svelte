@@ -6,7 +6,7 @@
   import Header from "../Header/Header.svelte";
   import Sidebar from "../Sidebar/Sidebar.svelte";
   import {
-    boards,
+    boardTabOptions,
     currentBoard,
     currentBoardId,
     setCurrentBoardId,
@@ -36,7 +36,7 @@
         class="bg-white dark:bg-gray-dark py-4 max-w-[16.5rem] mx-auto flex flex-col gap-4 rounded-lg"
       >
         <BoardTabList
-          boardOptions={$boards.map((b) => [b.id, b.name])}
+          boardOptions={$boardTabOptions}
           selectedBoardId={$currentBoardId}
           on:boardSelected={(e) => setCurrentBoardId(e.detail)}
           on:createNewBoard={() => eventBus.dispatch("addNewBoard")}

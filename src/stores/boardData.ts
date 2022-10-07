@@ -8,9 +8,15 @@ import { derived, get, writable } from "svelte/store";
 // All Boards
 
 export const boards = writable([] as Board[]);
+export const boardTabOptions = writable<[string, string][]>([]);
+
+export function updateBoardTabOptions() {
+  boardTabOptions.set(get(boards).map((bd) => [bd.id, bd.name]));
+}
 
 export function loadBoards(boardData: Board[]) {
   boards.set(boardData);
+  updateBoardTabOptions();
 }
 
 export function addBoard(name: string, columnNames: string[]) {
@@ -19,6 +25,7 @@ export function addBoard(name: string, columnNames: string[]) {
   const newBoards = [...get(boards), newBoard];
   boards.set(newBoards);
 
+  updateBoardTabOptions();
   return newBoard;
 }
 
@@ -34,6 +41,7 @@ export function deleteBoard(board: Board) {
   }
 
   boards.set(newBoards);
+  updateBoardTabOptions();
 }
 
 // Current Board
